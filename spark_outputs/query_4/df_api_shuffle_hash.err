@@ -1,0 +1,801 @@
+24/01/23 19:04:16 INFO SparkContext: Running Spark version 3.5.0
+24/01/23 19:04:16 INFO SparkContext: OS info Linux, 4.4.0-109-generic, amd64
+24/01/23 19:04:16 INFO SparkContext: Java version 1.8.0_292
+24/01/23 19:04:16 INFO ResourceUtils: ==============================================================
+24/01/23 19:04:16 INFO ResourceUtils: No custom resources configured for spark.driver.
+24/01/23 19:04:16 INFO ResourceUtils: ==============================================================
+24/01/23 19:04:16 INFO SparkContext: Submitted application: Query 4 (DF, shuffle_hash)
+24/01/23 19:04:16 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+24/01/23 19:04:16 INFO ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+24/01/23 19:04:16 INFO ResourceProfileManager: Added ResourceProfile id: 0
+24/01/23 19:04:16 INFO SecurityManager: Changing view acls to: user
+24/01/23 19:04:16 INFO SecurityManager: Changing modify acls to: user
+24/01/23 19:04:16 INFO SecurityManager: Changing view acls groups to: 
+24/01/23 19:04:16 INFO SecurityManager: Changing modify acls groups to: 
+24/01/23 19:04:16 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: user; groups with view permissions: EMPTY; users with modify permissions: user; groups with modify permissions: EMPTY
+24/01/23 19:04:16 INFO Utils: Successfully started service 'sparkDriver' on port 40927.
+24/01/23 19:04:17 INFO SparkEnv: Registering MapOutputTracker
+24/01/23 19:04:17 INFO SparkEnv: Registering BlockManagerMaster
+24/01/23 19:04:17 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+24/01/23 19:04:17 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+24/01/23 19:04:17 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+24/01/23 19:04:17 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-b5eecf76-b3ee-4a05-be10-f2cf0d3e41e9
+24/01/23 19:04:17 INFO MemoryStore: MemoryStore started with capacity 366.3 MiB
+24/01/23 19:04:17 INFO SparkEnv: Registering OutputCommitCoordinator
+24/01/23 19:04:17 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+24/01/23 19:04:17 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+24/01/23 19:04:17 INFO DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at okeanos-master/192.168.0.1:8032
+24/01/23 19:04:18 INFO Configuration: resource-types.xml not found
+24/01/23 19:04:18 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+24/01/23 19:04:18 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (6144 MB per container)
+24/01/23 19:04:18 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+24/01/23 19:04:18 INFO Client: Setting up container launch context for our AM
+24/01/23 19:04:18 INFO Client: Setting up the launch environment for our AM container
+24/01/23 19:04:18 INFO Client: Preparing resources for our AM container
+24/01/23 19:04:18 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+24/01/23 19:04:22 INFO Client: Uploading resource file:/tmp/spark-6d74586e-55f2-4387-bbb7-abff4e976af9/__spark_libs__4492956127769974327.zip -> hdfs://okeanos-master:54310/user/user/.sparkStaging/application_1706028137873_0015/__spark_libs__4492956127769974327.zip
+24/01/23 19:04:24 INFO Client: Uploading resource file:/home/user/opt/bin/spark-3.5.0-bin-hadoop3/python/lib/pyspark.zip -> hdfs://okeanos-master:54310/user/user/.sparkStaging/application_1706028137873_0015/pyspark.zip
+24/01/23 19:04:25 INFO Client: Uploading resource file:/home/user/opt/bin/spark-3.5.0-bin-hadoop3/python/lib/py4j-0.10.9.7-src.zip -> hdfs://okeanos-master:54310/user/user/.sparkStaging/application_1706028137873_0015/py4j-0.10.9.7-src.zip
+24/01/23 19:04:26 INFO Client: Uploading resource file:/tmp/spark-6d74586e-55f2-4387-bbb7-abff4e976af9/__spark_conf__4201811338552775055.zip -> hdfs://okeanos-master:54310/user/user/.sparkStaging/application_1706028137873_0015/__spark_conf__.zip
+24/01/23 19:04:26 INFO SecurityManager: Changing view acls to: user
+24/01/23 19:04:26 INFO SecurityManager: Changing modify acls to: user
+24/01/23 19:04:26 INFO SecurityManager: Changing view acls groups to: 
+24/01/23 19:04:26 INFO SecurityManager: Changing modify acls groups to: 
+24/01/23 19:04:26 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: user; groups with view permissions: EMPTY; users with modify permissions: user; groups with modify permissions: EMPTY
+24/01/23 19:04:26 INFO Client: Submitting application application_1706028137873_0015 to ResourceManager
+24/01/23 19:04:26 INFO YarnClientImpl: Submitted application application_1706028137873_0015
+24/01/23 19:04:27 INFO Client: Application report for application_1706028137873_0015 (state: ACCEPTED)
+24/01/23 19:04:27 INFO Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1706029466186
+	 final status: UNDEFINED
+	 tracking URL: http://83.212.80.118:8088/proxy/application_1706028137873_0015/
+	 user: user
+24/01/23 19:04:33 INFO Client: Application report for application_1706028137873_0015 (state: RUNNING)
+24/01/23 19:04:33 INFO Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 192.168.0.2
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1706029466186
+	 final status: UNDEFINED
+	 tracking URL: http://83.212.80.118:8088/proxy/application_1706028137873_0015/
+	 user: user
+24/01/23 19:04:33 INFO YarnClientSchedulerBackend: Application application_1706028137873_0015 has started running.
+24/01/23 19:04:33 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 37128.
+24/01/23 19:04:33 INFO NettyBlockTransferService: Server created on okeanos-master:37128
+24/01/23 19:04:33 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+24/01/23 19:04:33 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, okeanos-master, 37128, None)
+24/01/23 19:04:33 INFO BlockManagerMasterEndpoint: Registering block manager okeanos-master:37128 with 366.3 MiB RAM, BlockManagerId(driver, okeanos-master, 37128, None)
+24/01/23 19:04:33 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, okeanos-master, 37128, None)
+24/01/23 19:04:33 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, okeanos-master, 37128, None)
+24/01/23 19:04:33 INFO SingleEventLogFileWriter: Logging events to hdfs://okeanos-master:54310/spark.eventLog/application_1706028137873_0015.inprogress
+24/01/23 19:04:42 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> 83.212.80.118, PROXY_URI_BASES -> http://83.212.80.118:8088/proxy/application_1706028137873_0015), /proxy/application_1706028137873_0015
+24/01/23 19:04:43 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+24/01/23 19:04:47 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.0.2:45838) with ID 1,  ResourceProfileId 0
+24/01/23 19:04:47 INFO BlockManagerMasterEndpoint: Registering block manager okeanos-worker:39598 with 366.3 MiB RAM, BlockManagerId(1, okeanos-worker, 39598, None)
+24/01/23 19:04:47 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after waiting maxRegisteredResourcesWaitingTime: 30000000000(ns)
+24/01/23 19:04:48 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+24/01/23 19:04:48 INFO SharedState: Warehouse path is 'file:/home/user/code/spark-warehouse'.
+24/01/23 19:04:48 INFO ServerInfo: Adding filter to /SQL: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+24/01/23 19:04:48 INFO ServerInfo: Adding filter to /SQL/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+24/01/23 19:04:48 INFO ServerInfo: Adding filter to /SQL/execution: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+24/01/23 19:04:48 INFO ServerInfo: Adding filter to /SQL/execution/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+24/01/23 19:04:48 INFO ServerInfo: Adding filter to /static/sql: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+24/01/23 19:04:48 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.0.2:45842) with ID 3,  ResourceProfileId 0
+24/01/23 19:04:48 INFO BlockManagerMasterEndpoint: Registering block manager okeanos-worker:37615 with 366.3 MiB RAM, BlockManagerId(3, okeanos-worker, 37615, None)
+24/01/23 19:04:49 INFO InMemoryFileIndex: It took 85 ms to list leaf files for 1 paths.
+24/01/23 19:04:51 INFO InMemoryFileIndex: It took 38 ms to list leaf files for 1 paths.
+24/01/23 19:04:51 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.0.1:49550) with ID 2,  ResourceProfileId 0
+24/01/23 19:04:51 INFO BlockManagerMasterEndpoint: Registering block manager okeanos-master:40905 with 366.3 MiB RAM, BlockManagerId(2, okeanos-master, 40905, None)
+24/01/23 19:04:51 INFO YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (192.168.0.1:49552) with ID 4,  ResourceProfileId 0
+24/01/23 19:04:52 INFO BlockManagerMasterEndpoint: Registering block manager okeanos-master:32806 with 366.3 MiB RAM, BlockManagerId(4, okeanos-master, 32806, None)
+24/01/23 19:04:52 INFO FileSourceStrategy: Pushed Filters: IsNotNull(LAT),IsNotNull(LON),IsNotNull(Weapon Used Cd),Not(EqualTo(LAT,0.0)),Not(EqualTo(LON,0.0)),GreaterThanOrEqual(Weapon Used Cd,100),LessThanOrEqual(Weapon Used Cd,199),IsNotNull(AREA)
+24/01/23 19:04:52 INFO FileSourceStrategy: Post-Scan Filters: isnotnull(LAT#64),isnotnull(LON#65),isnotnull(Weapon Used Cd#54),NOT (LAT#64 = 0.0),NOT (LON#65 = 0.0),(Weapon Used Cd#54 >= 100),(Weapon Used Cd#54 <= 199),isnotnull(AREA#42)
+24/01/23 19:04:52 INFO FileSourceStrategy: Pushed Filters: IsNotNull(PREC)
+24/01/23 19:04:52 INFO FileSourceStrategy: Post-Scan Filters: isnotnull(PREC#5)
+24/01/23 19:04:53 INFO InMemoryFileIndex: It took 8 ms to list leaf files for 1 paths.
+24/01/23 19:04:53 WARN HintErrorLogger: Hint (strategy=shuffle_hash) is not supported in the query: no equi-join keys.
+24/01/23 19:04:53 INFO FileSourceStrategy: Pushed Filters: IsNotNull(LAT),IsNotNull(LON),IsNotNull(Weapon Used Cd),Not(EqualTo(LAT,0.0)),Not(EqualTo(LON,0.0)),GreaterThanOrEqual(Weapon Used Cd,100),LessThanOrEqual(Weapon Used Cd,199)
+24/01/23 19:04:53 INFO FileSourceStrategy: Post-Scan Filters: isnotnull(LAT#287),isnotnull(LON#288),isnotnull(Weapon Used Cd#277),NOT (LAT#287 = 0.0),NOT (LON#288 = 0.0),(Weapon Used Cd#277 >= 100),(Weapon Used Cd#277 <= 199)
+24/01/23 19:04:53 INFO FileSourceStrategy: Pushed Filters: 
+24/01/23 19:04:53 INFO FileSourceStrategy: Post-Scan Filters: 
+24/01/23 19:04:53 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+24/01/23 19:04:54 INFO CodeGenerator: Code generated in 274.051468 ms
+24/01/23 19:04:54 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 353.8 KiB, free 366.0 MiB)
+24/01/23 19:04:54 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 35.4 KiB, free 365.9 MiB)
+24/01/23 19:04:54 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on okeanos-master:37128 (size: 35.4 KiB, free: 366.3 MiB)
+24/01/23 19:04:54 INFO SparkContext: Created broadcast 0 from showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:04:54 INFO FileSourceScanExec: Planning scan with bin packing, max size: 134217728 bytes, open cost is considered as scanning 4194304 bytes.
+24/01/23 19:04:54 INFO DAGScheduler: Registering RDD 3 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 0
+24/01/23 19:04:55 INFO DAGScheduler: Got map stage job 0 (showString at NativeMethodAccessorImpl.java:0) with 9 output partitions
+24/01/23 19:04:55 INFO DAGScheduler: Final stage: ShuffleMapStage 0 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:04:55 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:04:55 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:04:55 INFO CodeGenerator: Code generated in 28.493292 ms
+24/01/23 19:04:55 INFO DAGScheduler: Submitting ShuffleMapStage 0 (MapPartitionsRDD[3] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 353.8 KiB, free 365.6 MiB)
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 35.4 KiB, free 365.5 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on okeanos-master:37128 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:04:55 INFO SparkContext: Created broadcast 1 from showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:04:55 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194304 bytes, open cost is considered as scanning 4194304 bytes.
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 22.1 KiB, free 365.5 MiB)
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 10.2 KiB, free 365.5 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on okeanos-master:37128 (size: 10.2 KiB, free: 366.2 MiB)
+24/01/23 19:04:55 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:04:55 INFO DAGScheduler: Submitting 9 missing tasks from ShuffleMapStage 0 (MapPartitionsRDD[3] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8))
+24/01/23 19:04:55 INFO YarnScheduler: Adding task set 0.0 with 9 tasks resource profile 0
+24/01/23 19:04:55 INFO DAGScheduler: Registering RDD 7 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 1
+24/01/23 19:04:55 INFO DAGScheduler: Got map stage job 1 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:04:55 INFO DAGScheduler: Final stage: ShuffleMapStage 1 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:04:55 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:04:55 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:04:55 INFO DAGScheduler: Submitting ShuffleMapStage 1 (MapPartitionsRDD[7] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 18.9 KiB, free 365.5 MiB)
+24/01/23 19:04:55 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 9.1 KiB, free 365.5 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on okeanos-master:37128 (size: 9.1 KiB, free: 366.2 MiB)
+24/01/23 19:04:55 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:04:55 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 1 (MapPartitionsRDD[7] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:04:55 INFO YarnScheduler: Adding task set 1.0 with 1 tasks resource profile 0
+24/01/23 19:04:55 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (okeanos-master, executor 4, partition 0, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:04:55 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (okeanos-worker, executor 3, partition 1, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:04:55 INFO TaskSetManager: Starting task 4.0 in stage 0.0 (TID 2) (okeanos-master, executor 2, partition 4, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:04:55 INFO TaskSetManager: Starting task 2.0 in stage 0.0 (TID 3) (okeanos-worker, executor 1, partition 2, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on okeanos-master:40905 (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on okeanos-master:32806 (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on okeanos-worker:37615 (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:04:55 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on okeanos-worker:39598 (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:04:57 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on okeanos-worker:37615 (size: 35.4 KiB, free: 366.3 MiB)
+24/01/23 19:04:57 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on okeanos-worker:39598 (size: 35.4 KiB, free: 366.3 MiB)
+24/01/23 19:04:57 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on okeanos-master:40905 (size: 35.4 KiB, free: 366.3 MiB)
+24/01/23 19:04:57 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on okeanos-master:32806 (size: 35.4 KiB, free: 366.3 MiB)
+24/01/23 19:05:00 INFO TaskSetManager: Starting task 3.0 in stage 0.0 (TID 4) (okeanos-worker, executor 3, partition 3, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:05:00 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 5431 ms on okeanos-worker (executor 3) (1/9)
+24/01/23 19:05:01 INFO TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (okeanos-worker, executor 1, partition 5, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:05:01 INFO TaskSetManager: Finished task 2.0 in stage 0.0 (TID 3) in 6012 ms on okeanos-worker (executor 1) (2/9)
+24/01/23 19:05:01 INFO TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (okeanos-master, executor 2, partition 6, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:05:01 INFO TaskSetManager: Finished task 4.0 in stage 0.0 (TID 2) in 6288 ms on okeanos-master (executor 2) (3/9)
+24/01/23 19:05:01 INFO TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (okeanos-master, executor 4, partition 7, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:05:01 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 6420 ms on okeanos-master (executor 4) (4/9)
+24/01/23 19:05:02 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 8) (okeanos-worker, executor 3, partition 0, RACK_LOCAL, 8249 bytes) 
+24/01/23 19:05:02 INFO TaskSetManager: Finished task 3.0 in stage 0.0 (TID 4) in 1438 ms on okeanos-worker (executor 3) (5/9)
+24/01/23 19:05:02 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on okeanos-worker:37615 (size: 9.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:02 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on okeanos-worker:37615 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:05:02 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 8) in 237 ms on okeanos-worker (executor 3) (1/1)
+24/01/23 19:05:02 INFO YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+24/01/23 19:05:02 INFO DAGScheduler: ShuffleMapStage 1 (showString at NativeMethodAccessorImpl.java:0) finished in 7.113 s
+24/01/23 19:05:02 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:05:02 INFO DAGScheduler: running: Set(ShuffleMapStage 0)
+24/01/23 19:05:02 INFO DAGScheduler: waiting: Set()
+24/01/23 19:05:02 INFO DAGScheduler: failed: Set()
+24/01/23 19:05:02 INFO TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 1381 ms on okeanos-worker (executor 1) (6/9)
+24/01/23 19:05:03 INFO TaskSetManager: Starting task 8.0 in stage 0.0 (TID 9) (okeanos-master, executor 2, partition 8, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:05:03 INFO TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 1538 ms on okeanos-master (executor 2) (7/9)
+24/01/23 19:05:03 INFO TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 1561 ms on okeanos-master (executor 4) (8/9)
+24/01/23 19:05:04 INFO TaskSetManager: Finished task 8.0 in stage 0.0 (TID 9) in 941 ms on okeanos-master (executor 2) (9/9)
+24/01/23 19:05:04 INFO YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+24/01/23 19:05:04 INFO DAGScheduler: ShuffleMapStage 0 (showString at NativeMethodAccessorImpl.java:0) finished in 8.953 s
+24/01/23 19:05:04 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:05:04 INFO DAGScheduler: running: Set()
+24/01/23 19:05:04 INFO DAGScheduler: waiting: Set()
+24/01/23 19:05:04 INFO DAGScheduler: failed: Set()
+24/01/23 19:05:04 INFO ShufflePartitionsUtil: For shuffle(0, 1), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:05:04 INFO CodeGenerator: Code generated in 23.264401 ms
+24/01/23 19:05:04 INFO CodeGenerator: Code generated in 24.13139 ms
+24/01/23 19:05:04 INFO DAGScheduler: Got job 2 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:05:04 INFO DAGScheduler: Final stage: ResultStage 4 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:04 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 2, ShuffleMapStage 3)
+24/01/23 19:05:04 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:04 INFO DAGScheduler: Submitting ResultStage 4 (AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+   +- BatchEvalPython [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+      +- Project [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+         +- ShuffledHashJoin [PREC#125], [PREC#5], Inner, BuildRight
+            :- Exchange hashpartitioning(PREC#125, 200), ENSURE_REQUIREMENTS, [plan_id=33]
+            :  +- Project [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+            :     +- Filter (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+            :        +- FileScan csv [Date Rptd#39,AREA#42,Weapon Used Cd#54,LAT#64,LON#65] Batched: false, DataFilters: [isnotnull(LAT#64), isnotnull(LON#65), isnotnull(Weapon Used Cd#54), NOT (LAT#64 = 0.0), NOT (L... MapPartitionsRDD[16] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:04 INFO MemoryStore: Block broadcast_4 stored as values in memory (estimated size 56.9 KiB, free 365.4 MiB)
+24/01/23 19:05:04 INFO MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 26.5 KiB, free 365.4 MiB)
+24/01/23 19:05:04 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on okeanos-master:37128 (size: 26.5 KiB, free: 366.2 MiB)
+24/01/23 19:05:04 INFO SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:04 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 4 (AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+   +- BatchEvalPython [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+      +- Project [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+         +- ShuffledHashJoin [PREC#125], [PREC#5], Inner, BuildRight
+            :- Exchange hashpartitioning(PREC#125, 200), ENSURE_REQUIREMENTS, [plan_id=33]
+            :  +- Project [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+            :     +- Filter (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+            :        +- FileScan csv [Date Rptd#39,AREA#42,Weapon Used Cd#54,LAT#64,LON#65] Batched: false, DataFilters: [isnotnull(LAT#64), isnotnull(LON#65), isnotnull(Weapon Used Cd#54), NOT (LAT#64 = 0.0), NOT (L... MapPartitionsRDD[16] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:04 INFO YarnScheduler: Adding task set 4.0 with 1 tasks resource profile 0
+24/01/23 19:05:04 INFO TaskSetManager: Starting task 0.0 in stage 4.0 (TID 10) (okeanos-worker, executor 1, partition 0, NODE_LOCAL, 7908 bytes) 
+24/01/23 19:05:04 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on okeanos-worker:39598 (size: 26.5 KiB, free: 366.2 MiB)
+24/01/23 19:05:04 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 192.168.0.2:45838
+24/01/23 19:05:04 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 192.168.0.2:45838
+24/01/23 19:05:34 INFO BlockManagerInfo: Added rdd_16_0 in memory on okeanos-worker:39598 (size: 1063.4 KiB, free: 365.2 MiB)
+24/01/23 19:05:34 INFO TaskSetManager: Finished task 0.0 in stage 4.0 (TID 10) in 30138 ms on okeanos-worker (executor 1) (1/1)
+24/01/23 19:05:34 INFO YarnScheduler: Removed TaskSet 4.0, whose tasks have all completed, from pool 
+24/01/23 19:05:34 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 33968
+24/01/23 19:05:34 INFO DAGScheduler: ResultStage 4 (showString at NativeMethodAccessorImpl.java:0) finished in 30.167 s
+24/01/23 19:05:34 INFO DAGScheduler: Job 2 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:05:34 INFO YarnScheduler: Killing all running tasks in stage 4: Stage finished
+24/01/23 19:05:34 INFO CodeGenerator: Code generated in 80.22565 ms
+24/01/23 19:05:34 INFO DAGScheduler: Registering RDD 21 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 2
+24/01/23 19:05:34 INFO DAGScheduler: Got map stage job 3 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:05:34 INFO DAGScheduler: Final stage: ShuffleMapStage 7 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:34 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 5, ShuffleMapStage 6)
+24/01/23 19:05:34 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:34 INFO DAGScheduler: Submitting ShuffleMapStage 7 (MapPartitionsRDD[21] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:34 INFO MemoryStore: Block broadcast_5 stored as values in memory (estimated size 79.1 KiB, free 365.3 MiB)
+24/01/23 19:05:34 INFO MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 35.6 KiB, free 365.3 MiB)
+24/01/23 19:05:34 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on okeanos-master:37128 (size: 35.6 KiB, free: 366.2 MiB)
+24/01/23 19:05:34 INFO SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:34 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 7 (MapPartitionsRDD[21] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:34 INFO YarnScheduler: Adding task set 7.0 with 1 tasks resource profile 0
+24/01/23 19:05:34 INFO TaskSetManager: Starting task 0.0 in stage 7.0 (TID 11) (okeanos-worker, executor 1, partition 0, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:05:34 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on okeanos-worker:39598 (size: 35.6 KiB, free: 365.2 MiB)
+24/01/23 19:05:34 INFO TaskSetManager: Finished task 0.0 in stage 7.0 (TID 11) in 325 ms on okeanos-worker (executor 1) (1/1)
+24/01/23 19:05:34 INFO YarnScheduler: Removed TaskSet 7.0, whose tasks have all completed, from pool 
+24/01/23 19:05:34 INFO DAGScheduler: ShuffleMapStage 7 (showString at NativeMethodAccessorImpl.java:0) finished in 0.352 s
+24/01/23 19:05:34 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:05:34 INFO DAGScheduler: running: Set()
+24/01/23 19:05:34 INFO DAGScheduler: waiting: Set()
+24/01/23 19:05:34 INFO DAGScheduler: failed: Set()
+24/01/23 19:05:34 INFO ShufflePartitionsUtil: For shuffle(2), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:05:35 INFO CodeGenerator: Code generated in 15.85406 ms
+24/01/23 19:05:35 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+24/01/23 19:05:35 INFO CodeGenerator: Code generated in 24.523292 ms
+24/01/23 19:05:35 INFO SparkContext: Starting job: showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:05:35 INFO DAGScheduler: Got job 4 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:05:35 INFO DAGScheduler: Final stage: ResultStage 11 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:35 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 10)
+24/01/23 19:05:35 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:35 INFO DAGScheduler: Submitting ResultStage 11 (MapPartitionsRDD[25] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:35 INFO MemoryStore: Block broadcast_6 stored as values in memory (estimated size 82.2 KiB, free 365.2 MiB)
+24/01/23 19:05:35 INFO MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 36.6 KiB, free 365.2 MiB)
+24/01/23 19:05:35 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on okeanos-master:37128 (size: 36.6 KiB, free: 366.1 MiB)
+24/01/23 19:05:35 INFO SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:35 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 11 (MapPartitionsRDD[25] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:35 INFO YarnScheduler: Adding task set 11.0 with 1 tasks resource profile 0
+24/01/23 19:05:35 INFO TaskSetManager: Starting task 0.0 in stage 11.0 (TID 12) (okeanos-worker, executor 3, partition 0, NODE_LOCAL, 7626 bytes) 
+24/01/23 19:05:35 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on okeanos-worker:37615 (size: 36.6 KiB, free: 366.2 MiB)
+24/01/23 19:05:35 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 192.168.0.2:45842
+24/01/23 19:05:35 INFO TaskSetManager: Finished task 0.0 in stage 11.0 (TID 12) in 642 ms on okeanos-worker (executor 3) (1/1)
+24/01/23 19:05:35 INFO YarnScheduler: Removed TaskSet 11.0, whose tasks have all completed, from pool 
+24/01/23 19:05:35 INFO DAGScheduler: ResultStage 11 (showString at NativeMethodAccessorImpl.java:0) finished in 0.654 s
+24/01/23 19:05:35 INFO DAGScheduler: Job 4 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:05:35 INFO YarnScheduler: Killing all running tasks in stage 11: Stage finished
+24/01/23 19:05:35 INFO DAGScheduler: Job 4 finished: showString at NativeMethodAccessorImpl.java:0, took 0.663770 s
+24/01/23 19:05:35 INFO CodeGenerator: Code generated in 12.10908 ms
+24/01/23 19:05:36 INFO CodeGenerator: Code generated in 11.697761 ms
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_6_piece0 on okeanos-worker:37615 in memory (size: 36.6 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_6_piece0 on okeanos-master:37128 in memory (size: 36.6 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_4_piece0 on okeanos-master:37128 in memory (size: 26.5 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_4_piece0 on okeanos-worker:39598 in memory (size: 26.5 KiB, free: 365.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_5_piece0 on okeanos-master:37128 in memory (size: 35.6 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_5_piece0 on okeanos-worker:39598 in memory (size: 35.6 KiB, free: 365.2 MiB)
+24/01/23 19:05:37 INFO CodeGenerator: Code generated in 49.598998 ms
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_3_piece0 on okeanos-master:37128 in memory (size: 9.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_3_piece0 on okeanos-worker:37615 in memory (size: 9.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO DAGScheduler: Registering RDD 30 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 3
+24/01/23 19:05:37 INFO DAGScheduler: Got map stage job 5 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:05:37 INFO DAGScheduler: Final stage: ShuffleMapStage 14 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:37 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 12, ShuffleMapStage 13)
+24/01/23 19:05:37 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:37 INFO DAGScheduler: Submitting ShuffleMapStage 14 (MapPartitionsRDD[30] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:37 INFO MemoryStore: Block broadcast_7 stored as values in memory (estimated size 79.4 KiB, free 365.4 MiB)
+24/01/23 19:05:37 INFO MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 35.7 KiB, free 365.4 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on okeanos-master:37128 (size: 35.7 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO SparkContext: Created broadcast 7 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:37 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 14 (MapPartitionsRDD[30] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:37 INFO YarnScheduler: Adding task set 14.0 with 1 tasks resource profile 0
+24/01/23 19:05:37 INFO TaskSetManager: Starting task 0.0 in stage 14.0 (TID 13) (okeanos-worker, executor 1, partition 0, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_2_piece0 on okeanos-worker:39598 in memory (size: 10.2 KiB, free: 365.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_2_piece0 on okeanos-worker:37615 in memory (size: 10.2 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_2_piece0 on okeanos-master:37128 in memory (size: 10.2 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_2_piece0 on okeanos-master:40905 in memory (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Removed broadcast_2_piece0 on okeanos-master:32806 in memory (size: 10.2 KiB, free: 366.3 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on okeanos-worker:39598 (size: 35.7 KiB, free: 365.2 MiB)
+24/01/23 19:05:37 INFO TaskSetManager: Finished task 0.0 in stage 14.0 (TID 13) in 277 ms on okeanos-worker (executor 1) (1/1)
+24/01/23 19:05:37 INFO YarnScheduler: Removed TaskSet 14.0, whose tasks have all completed, from pool 
+24/01/23 19:05:37 INFO DAGScheduler: ShuffleMapStage 14 (showString at NativeMethodAccessorImpl.java:0) finished in 0.293 s
+24/01/23 19:05:37 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:05:37 INFO DAGScheduler: running: Set()
+24/01/23 19:05:37 INFO DAGScheduler: waiting: Set()
+24/01/23 19:05:37 INFO DAGScheduler: failed: Set()
+24/01/23 19:05:37 INFO ShufflePartitionsUtil: For shuffle(3), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:05:37 INFO CodeGenerator: Code generated in 6.483 ms
+24/01/23 19:05:37 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+24/01/23 19:05:37 INFO CodeGenerator: Code generated in 45.381229 ms
+24/01/23 19:05:37 INFO SparkContext: Starting job: showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:05:37 INFO DAGScheduler: Got job 6 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:05:37 INFO DAGScheduler: Final stage: ResultStage 18 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:37 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 17)
+24/01/23 19:05:37 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:37 INFO DAGScheduler: Submitting ResultStage 18 (MapPartitionsRDD[34] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:37 INFO MemoryStore: Block broadcast_8 stored as values in memory (estimated size 82.1 KiB, free 365.3 MiB)
+24/01/23 19:05:37 INFO MemoryStore: Block broadcast_8_piece0 stored as bytes in memory (estimated size 36.5 KiB, free 365.3 MiB)
+24/01/23 19:05:37 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on okeanos-master:37128 (size: 36.5 KiB, free: 366.2 MiB)
+24/01/23 19:05:37 INFO SparkContext: Created broadcast 8 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:37 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 18 (MapPartitionsRDD[34] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:37 INFO YarnScheduler: Adding task set 18.0 with 1 tasks resource profile 0
+24/01/23 19:05:37 INFO TaskSetManager: Starting task 0.0 in stage 18.0 (TID 14) (okeanos-worker, executor 1, partition 0, NODE_LOCAL, 7626 bytes) 
+24/01/23 19:05:37 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on okeanos-worker:39598 (size: 36.5 KiB, free: 365.2 MiB)
+24/01/23 19:05:37 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 3 to 192.168.0.2:45838
+24/01/23 19:05:37 INFO TaskSetManager: Finished task 0.0 in stage 18.0 (TID 14) in 126 ms on okeanos-worker (executor 1) (1/1)
+24/01/23 19:05:37 INFO YarnScheduler: Removed TaskSet 18.0, whose tasks have all completed, from pool 
+24/01/23 19:05:37 INFO DAGScheduler: ResultStage 18 (showString at NativeMethodAccessorImpl.java:0) finished in 0.143 s
+24/01/23 19:05:37 INFO DAGScheduler: Job 6 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:05:37 INFO YarnScheduler: Killing all running tasks in stage 18: Stage finished
+24/01/23 19:05:37 INFO DAGScheduler: Job 6 finished: showString at NativeMethodAccessorImpl.java:0, took 0.158920 s
+24/01/23 19:05:37 INFO CodeGenerator: Code generated in 26.455243 ms
+24/01/23 19:05:37 INFO MapPartitionsRDD: Removing RDD 16 from persistence list
+24/01/23 19:05:37 INFO BlockManager: Removing RDD 16
+24/01/23 19:05:38 INFO CodeGenerator: Code generated in 9.423186 ms
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_9 stored as values in memory (estimated size 353.8 KiB, free 365.0 MiB)
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_9_piece0 stored as bytes in memory (estimated size 35.4 KiB, free 364.9 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on okeanos-master:37128 (size: 35.4 KiB, free: 366.1 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 9 from $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266
+24/01/23 19:05:38 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194304 bytes, open cost is considered as scanning 4194304 bytes.
+24/01/23 19:05:38 INFO SparkContext: Starting job: $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266
+24/01/23 19:05:38 INFO DAGScheduler: Got job 7 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:266) with 1 output partitions
+24/01/23 19:05:38 INFO DAGScheduler: Final stage: ResultStage 19 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:266)
+24/01/23 19:05:38 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:05:38 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:38 INFO DAGScheduler: Submitting ResultStage 19 (MapPartitionsRDD[38] at $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266), which has no missing parents
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_10 stored as values in memory (estimated size 16.2 KiB, free 364.9 MiB)
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_10_piece0 stored as bytes in memory (estimated size 7.7 KiB, free 364.9 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_10_piece0 in memory on okeanos-master:37128 (size: 7.7 KiB, free: 366.1 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 10 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:38 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 19 (MapPartitionsRDD[38] at $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:05:38 INFO YarnScheduler: Adding task set 19.0 with 1 tasks resource profile 0
+24/01/23 19:05:38 INFO TaskSetManager: Starting task 0.0 in stage 19.0 (TID 15) (okeanos-master, executor 2, partition 0, NODE_LOCAL, 8260 bytes) 
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_10_piece0 in memory on okeanos-master:40905 (size: 7.7 KiB, free: 366.3 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on okeanos-master:40905 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:05:38 INFO TaskSetManager: Finished task 0.0 in stage 19.0 (TID 15) in 280 ms on okeanos-master (executor 2) (1/1)
+24/01/23 19:05:38 INFO YarnScheduler: Removed TaskSet 19.0, whose tasks have all completed, from pool 
+24/01/23 19:05:38 INFO DAGScheduler: ResultStage 19 ($anonfun$withThreadLocalCaptured$1 at FutureTask.java:266) finished in 0.287 s
+24/01/23 19:05:38 INFO DAGScheduler: Job 7 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:05:38 INFO YarnScheduler: Killing all running tasks in stage 19: Stage finished
+24/01/23 19:05:38 INFO DAGScheduler: Job 7 finished: $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266, took 0.293015 s
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_11_piece0 stored as bytes in memory (estimated size 992.0 B, free 364.9 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on okeanos-master:37128 (size: 992.0 B, free: 366.1 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 11 from $anonfun$withThreadLocalCaptured$1 at FutureTask.java:266
+24/01/23 19:05:38 INFO FileSourceStrategy: Pushed Filters: IsNotNull(LAT),IsNotNull(LON),IsNotNull(Weapon Used Cd),Not(EqualTo(LAT,0.0)),Not(EqualTo(LON,0.0)),GreaterThanOrEqual(Weapon Used Cd,100),LessThanOrEqual(Weapon Used Cd,199)
+24/01/23 19:05:38 INFO FileSourceStrategy: Post-Scan Filters: isnotnull(LAT#287),isnotnull(LON#288),isnotnull(Weapon Used Cd#277),NOT (LAT#287 = 0.0),NOT (LON#288 = 0.0),(Weapon Used Cd#277 >= 100),(Weapon Used Cd#277 <= 199)
+24/01/23 19:05:38 INFO CodeGenerator: Code generated in 30.253944 ms
+24/01/23 19:05:38 INFO CodeGenerator: Code generated in 29.842855 ms
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_12 stored as values in memory (estimated size 353.8 KiB, free 364.6 MiB)
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_12_piece0 stored as bytes in memory (estimated size 35.4 KiB, free 364.5 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on okeanos-master:37128 (size: 35.4 KiB, free: 366.1 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 12 from showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:05:38 INFO FileSourceScanExec: Planning scan with bin packing, max size: 134217728 bytes, open cost is considered as scanning 4194304 bytes.
+24/01/23 19:05:38 INFO DAGScheduler: Got job 8 (showString at NativeMethodAccessorImpl.java:0) with 9 output partitions
+24/01/23 19:05:38 INFO DAGScheduler: Final stage: ResultStage 20 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:38 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:05:38 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:38 INFO DAGScheduler: Submitting ResultStage 20 (AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT... MapPartitionsRDD[46] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_13 stored as values in memory (estimated size 68.5 KiB, free 364.5 MiB)
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_13_piece0 stored as bytes in memory (estimated size 27.1 KiB, free 364.4 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on okeanos-master:37128 (size: 27.1 KiB, free: 366.1 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 13 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:38 INFO DAGScheduler: Submitting 9 missing tasks from ResultStage 20 (AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT... MapPartitionsRDD[46] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8))
+24/01/23 19:05:38 INFO YarnScheduler: Adding task set 20.0 with 9 tasks resource profile 0
+24/01/23 19:05:38 INFO DAGScheduler: Got job 9 (showString at NativeMethodAccessorImpl.java:0) with 9 output partitions
+24/01/23 19:05:38 INFO DAGScheduler: Final stage: ResultStage 21 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:05:38 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:05:38 INFO TaskSetManager: Starting task 0.0 in stage 20.0 (TID 16) (okeanos-master, executor 4, partition 0, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:05:38 INFO TaskSetManager: Starting task 4.0 in stage 20.0 (TID 17) (okeanos-master, executor 2, partition 4, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:05:38 INFO TaskSetManager: Starting task 1.0 in stage 20.0 (TID 18) (okeanos-worker, executor 3, partition 1, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:05:38 INFO TaskSetManager: Starting task 2.0 in stage 20.0 (TID 19) (okeanos-worker, executor 1, partition 2, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:05:38 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:05:38 INFO DAGScheduler: Submitting ResultStage 21 (AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT... MapPartitionsRDD[46] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_14 stored as values in memory (estimated size 68.5 KiB, free 364.4 MiB)
+24/01/23 19:05:38 INFO MemoryStore: Block broadcast_14_piece0 stored as bytes in memory (estimated size 27.1 KiB, free 364.3 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on okeanos-worker:37615 (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on okeanos-master:37128 (size: 27.1 KiB, free: 366.0 MiB)
+24/01/23 19:05:38 INFO SparkContext: Created broadcast 14 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on okeanos-worker:39598 (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on okeanos-master:40905 (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:38 INFO DAGScheduler: Submitting 9 missing tasks from ResultStage 21 (AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT... MapPartitionsRDD[46] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8))
+24/01/23 19:05:38 INFO YarnScheduler: Adding task set 21.0 with 9 tasks resource profile 0
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on okeanos-master:32806 (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on okeanos-worker:39598 (size: 992.0 B, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on okeanos-worker:37615 (size: 992.0 B, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on okeanos-master:40905 (size: 992.0 B, free: 366.2 MiB)
+24/01/23 19:05:38 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on okeanos-worker:39598 (size: 35.4 KiB, free: 366.1 MiB)
+24/01/23 19:05:39 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on okeanos-master:32806 (size: 992.0 B, free: 366.2 MiB)
+24/01/23 19:05:39 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on okeanos-master:40905 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:05:39 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on okeanos-worker:37615 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:05:40 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on okeanos-master:32806 (size: 35.4 KiB, free: 366.2 MiB)
+24/01/23 19:06:49 INFO BlockManagerInfo: Added rdd_46_2 in memory on okeanos-worker:39598 (size: 17.3 MiB, free: 348.9 MiB)
+24/01/23 19:06:49 INFO TaskSetManager: Starting task 3.0 in stage 20.0 (TID 20) (okeanos-worker, executor 1, partition 3, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:06:49 INFO TaskSetManager: Finished task 2.0 in stage 20.0 (TID 19) in 71116 ms on okeanos-worker (executor 1) (1/9)
+24/01/23 19:06:51 INFO BlockManagerInfo: Added rdd_46_1 in memory on okeanos-worker:37615 (size: 17.6 MiB, free: 348.6 MiB)
+24/01/23 19:06:51 INFO BlockManagerInfo: Added rdd_46_0 in memory on okeanos-master:32806 (size: 17.5 MiB, free: 348.7 MiB)
+24/01/23 19:06:51 INFO TaskSetManager: Starting task 5.0 in stage 20.0 (TID 21) (okeanos-worker, executor 3, partition 5, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:06:51 INFO TaskSetManager: Finished task 1.0 in stage 20.0 (TID 18) in 72881 ms on okeanos-worker (executor 3) (2/9)
+24/01/23 19:06:51 INFO TaskSetManager: Starting task 6.0 in stage 20.0 (TID 22) (okeanos-master, executor 4, partition 6, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:06:51 INFO TaskSetManager: Finished task 0.0 in stage 20.0 (TID 16) in 72917 ms on okeanos-master (executor 4) (3/9)
+24/01/23 19:06:51 INFO BlockManagerInfo: Added rdd_46_4 in memory on okeanos-master:40905 (size: 17.5 MiB, free: 348.6 MiB)
+24/01/23 19:06:51 INFO TaskSetManager: Starting task 7.0 in stage 20.0 (TID 23) (okeanos-master, executor 2, partition 7, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:06:51 INFO TaskSetManager: Finished task 4.0 in stage 20.0 (TID 17) in 73228 ms on okeanos-master (executor 2) (4/9)
+24/01/23 19:07:59 INFO BlockManagerInfo: Added rdd_46_3 in memory on okeanos-worker:39598 (size: 17.3 MiB, free: 331.5 MiB)
+24/01/23 19:07:59 INFO TaskSetManager: Starting task 8.0 in stage 20.0 (TID 24) (okeanos-worker, executor 1, partition 8, RACK_LOCAL, 8328 bytes) 
+24/01/23 19:07:59 INFO TaskSetManager: Finished task 3.0 in stage 20.0 (TID 20) in 69864 ms on okeanos-worker (executor 1) (5/9)
+24/01/23 19:08:01 INFO BlockManagerInfo: Added rdd_46_5 in memory on okeanos-worker:37615 (size: 17.5 MiB, free: 331.0 MiB)
+24/01/23 19:08:01 INFO TaskSetManager: Starting task 1.0 in stage 21.0 (TID 25) (okeanos-worker, executor 3, partition 1, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:01 INFO TaskSetManager: Finished task 5.0 in stage 20.0 (TID 21) in 70125 ms on okeanos-worker (executor 3) (6/9)
+24/01/23 19:08:01 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on okeanos-worker:37615 (size: 27.1 KiB, free: 331.0 MiB)
+24/01/23 19:08:01 INFO TaskSetManager: Starting task 2.0 in stage 21.0 (TID 26) (okeanos-worker, executor 3, partition 2, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:01 INFO TaskSetManager: Finished task 1.0 in stage 21.0 (TID 25) in 37 ms on okeanos-worker (executor 3) (1/9)
+24/01/23 19:08:01 INFO TaskSetManager: Starting task 3.0 in stage 21.0 (TID 27) (okeanos-worker, executor 3, partition 3, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:01 INFO TaskSetManager: Finished task 2.0 in stage 21.0 (TID 26) in 113 ms on okeanos-worker (executor 3) (2/9)
+24/01/23 19:08:01 INFO TaskSetManager: Starting task 5.0 in stage 21.0 (TID 28) (okeanos-worker, executor 3, partition 5, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:01 INFO TaskSetManager: Finished task 3.0 in stage 21.0 (TID 27) in 105 ms on okeanos-worker (executor 3) (3/9)
+24/01/23 19:08:01 INFO TaskSetManager: Finished task 5.0 in stage 21.0 (TID 28) in 18 ms on okeanos-worker (executor 3) (4/9)
+24/01/23 19:08:02 INFO BlockManagerInfo: Added rdd_46_7 in memory on okeanos-master:40905 (size: 17.5 MiB, free: 331.1 MiB)
+24/01/23 19:08:02 INFO TaskSetManager: Starting task 0.0 in stage 21.0 (TID 29) (okeanos-master, executor 2, partition 0, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:02 INFO TaskSetManager: Finished task 7.0 in stage 20.0 (TID 23) in 70244 ms on okeanos-master (executor 2) (7/9)
+24/01/23 19:08:02 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on okeanos-master:40905 (size: 27.1 KiB, free: 331.1 MiB)
+24/01/23 19:08:02 INFO TaskSetManager: Starting task 4.0 in stage 21.0 (TID 30) (okeanos-master, executor 2, partition 4, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:02 INFO TaskSetManager: Finished task 0.0 in stage 21.0 (TID 29) in 152 ms on okeanos-master (executor 2) (5/9)
+24/01/23 19:08:02 INFO TaskSetManager: Starting task 6.0 in stage 21.0 (TID 31) (okeanos-master, executor 2, partition 6, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:02 INFO TaskSetManager: Finished task 4.0 in stage 21.0 (TID 30) in 22 ms on okeanos-master (executor 2) (6/9)
+24/01/23 19:08:02 INFO BlockManagerInfo: Added rdd_46_6 in memory on okeanos-master:32806 (size: 17.6 MiB, free: 331.0 MiB)
+24/01/23 19:08:02 INFO TaskSetManager: Starting task 7.0 in stage 21.0 (TID 32) (okeanos-master, executor 4, partition 7, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:02 INFO TaskSetManager: Finished task 6.0 in stage 20.0 (TID 22) in 70807 ms on okeanos-master (executor 4) (8/9)
+24/01/23 19:08:02 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on okeanos-master:32806 (size: 27.1 KiB, free: 331.0 MiB)
+24/01/23 19:08:02 INFO TaskSetManager: Starting task 8.0 in stage 21.0 (TID 33) (okeanos-master, executor 4, partition 8, NODE_LOCAL, 8328 bytes) 
+24/01/23 19:08:02 INFO TaskSetManager: Finished task 7.0 in stage 21.0 (TID 32) in 157 ms on okeanos-master (executor 4) (7/9)
+24/01/23 19:08:48 INFO BlockManagerInfo: Added rdd_46_8 in memory on okeanos-worker:39598 (size: 12.2 MiB, free: 319.3 MiB)
+24/01/23 19:08:48 INFO TaskSetManager: Finished task 8.0 in stage 20.0 (TID 24) in 49306 ms on okeanos-worker (executor 1) (9/9)
+24/01/23 19:08:48 INFO YarnScheduler: Removed TaskSet 20.0, whose tasks have all completed, from pool 
+24/01/23 19:08:48 INFO DAGScheduler: ResultStage 20 (showString at NativeMethodAccessorImpl.java:0) finished in 190.288 s
+24/01/23 19:08:48 INFO DAGScheduler: Job 8 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:08:48 INFO YarnScheduler: Killing all running tasks in stage 20: Stage finished
+24/01/23 19:08:48 INFO CodeGenerator: Code generated in 8.202896 ms
+24/01/23 19:08:48 INFO DefaultCachedBatchSerializer: Predicate isnotnull(DR_NO#261) generates partition filter: ((DR_NO.count#2848 - DR_NO.nullCount#2847) > 0)
+24/01/23 19:08:48 INFO DefaultCachedBatchSerializer: Predicate isnotnull(Distance to Station#412) generates partition filter: ((Distance to Station.count#3013 - Distance to Station.nullCount#3012) > 0)
+24/01/23 19:08:48 INFO DAGScheduler: Registering RDD 51 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 4
+24/01/23 19:08:48 INFO DAGScheduler: Got map stage job 10 (showString at NativeMethodAccessorImpl.java:0) with 9 output partitions
+24/01/23 19:08:48 INFO DAGScheduler: Final stage: ShuffleMapStage 22 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:08:48 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:08:48 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:08:48 INFO DAGScheduler: Submitting ShuffleMapStage 22 (MapPartitionsRDD[51] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:08:48 INFO MemoryStore: Block broadcast_15 stored as values in memory (estimated size 77.0 KiB, free 364.3 MiB)
+24/01/23 19:08:48 INFO MemoryStore: Block broadcast_15_piece0 stored as bytes in memory (estimated size 30.7 KiB, free 364.2 MiB)
+24/01/23 19:08:48 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on okeanos-master:37128 (size: 30.7 KiB, free: 366.0 MiB)
+24/01/23 19:08:48 INFO SparkContext: Created broadcast 15 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:08:48 INFO DAGScheduler: Submitting 9 missing tasks from ShuffleMapStage 22 (MapPartitionsRDD[51] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8))
+24/01/23 19:08:48 INFO YarnScheduler: Adding task set 22.0 with 9 tasks resource profile 0
+24/01/23 19:08:48 INFO TaskSetManager: Starting task 1.0 in stage 22.0 (TID 34) (okeanos-worker, executor 3, partition 1, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:48 INFO TaskSetManager: Starting task 2.0 in stage 22.0 (TID 35) (okeanos-worker, executor 1, partition 2, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:48 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on okeanos-worker:37615 (size: 30.7 KiB, free: 331.0 MiB)
+24/01/23 19:08:48 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on okeanos-worker:39598 (size: 30.7 KiB, free: 319.3 MiB)
+24/01/23 19:08:49 INFO TaskSetManager: Starting task 3.0 in stage 22.0 (TID 36) (okeanos-worker, executor 1, partition 3, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:49 INFO TaskSetManager: Finished task 2.0 in stage 22.0 (TID 35) in 450 ms on okeanos-worker (executor 1) (1/9)
+24/01/23 19:08:49 INFO TaskSetManager: Starting task 5.0 in stage 22.0 (TID 37) (okeanos-worker, executor 3, partition 5, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:49 INFO TaskSetManager: Finished task 1.0 in stage 22.0 (TID 34) in 596 ms on okeanos-worker (executor 3) (2/9)
+24/01/23 19:08:49 INFO TaskSetManager: Starting task 8.0 in stage 22.0 (TID 38) (okeanos-worker, executor 1, partition 8, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:49 INFO TaskSetManager: Finished task 3.0 in stage 22.0 (TID 36) in 252 ms on okeanos-worker (executor 1) (3/9)
+24/01/23 19:08:49 INFO TaskSetManager: Finished task 8.0 in stage 22.0 (TID 38) in 148 ms on okeanos-worker (executor 1) (4/9)
+24/01/23 19:08:49 INFO TaskSetManager: Finished task 5.0 in stage 22.0 (TID 37) in 311 ms on okeanos-worker (executor 3) (5/9)
+24/01/23 19:08:50 INFO BlockManagerInfo: Added rdd_46_8 in memory on okeanos-master:32806 (size: 12.2 MiB, free: 318.8 MiB)
+24/01/23 19:08:50 INFO TaskSetManager: Starting task 0.0 in stage 22.0 (TID 39) (okeanos-master, executor 4, partition 0, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:50 INFO TaskSetManager: Finished task 8.0 in stage 21.0 (TID 33) in 48434 ms on okeanos-master (executor 4) (8/9)
+24/01/23 19:08:50 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on okeanos-master:32806 (size: 30.7 KiB, free: 318.8 MiB)
+24/01/23 19:08:51 INFO TaskSetManager: Starting task 6.0 in stage 22.0 (TID 40) (okeanos-master, executor 4, partition 6, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:08:51 INFO TaskSetManager: Finished task 0.0 in stage 22.0 (TID 39) in 460 ms on okeanos-master (executor 4) (6/9)
+24/01/23 19:08:51 INFO TaskSetManager: Finished task 6.0 in stage 22.0 (TID 40) in 257 ms on okeanos-master (executor 4) (7/9)
+24/01/23 19:08:52 INFO TaskSetManager: Starting task 4.0 in stage 22.0 (TID 41) (okeanos-master, executor 4, partition 4, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:08:53 INFO TaskSetManager: Starting task 7.0 in stage 22.0 (TID 42) (okeanos-master, executor 4, partition 7, NODE_LOCAL, 8317 bytes) 
+24/01/23 19:08:53 INFO TaskSetManager: Finished task 4.0 in stage 22.0 (TID 41) in 343 ms on okeanos-master (executor 4) (8/9)
+24/01/23 19:08:53 INFO TaskSetManager: Finished task 7.0 in stage 22.0 (TID 42) in 303 ms on okeanos-master (executor 4) (9/9)
+24/01/23 19:08:53 INFO YarnScheduler: Removed TaskSet 22.0, whose tasks have all completed, from pool 
+24/01/23 19:08:53 INFO DAGScheduler: ShuffleMapStage 22 (showString at NativeMethodAccessorImpl.java:0) finished in 4.473 s
+24/01/23 19:08:53 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:08:53 INFO DAGScheduler: running: Set(ResultStage 21)
+24/01/23 19:08:53 INFO DAGScheduler: waiting: Set()
+24/01/23 19:08:53 INFO DAGScheduler: failed: Set()
+24/01/23 19:09:12 INFO BlockManagerInfo: Added rdd_46_6 in memory on okeanos-master:40905 (size: 17.6 MiB, free: 313.5 MiB)
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 6.0 in stage 21.0 (TID 31) in 70144 ms on okeanos-master (executor 2) (9/9)
+24/01/23 19:09:12 INFO YarnScheduler: Removed TaskSet 21.0, whose tasks have all completed, from pool 
+24/01/23 19:09:12 INFO DAGScheduler: ResultStage 21 (showString at NativeMethodAccessorImpl.java:0) finished in 213.776 s
+24/01/23 19:09:12 INFO DAGScheduler: Job 9 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:09:12 INFO YarnScheduler: Killing all running tasks in stage 21: Stage finished
+24/01/23 19:09:12 INFO CodeGenerator: Code generated in 27.330029 ms
+24/01/23 19:09:12 INFO DefaultCachedBatchSerializer: Predicate isnotnull(DR_NO#656) generates partition filter: ((DR_NO.count#3019 - DR_NO.nullCount#3018) > 0)
+24/01/23 19:09:12 INFO DAGScheduler: Registering RDD 56 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 5
+24/01/23 19:09:12 INFO DAGScheduler: Got map stage job 11 (showString at NativeMethodAccessorImpl.java:0) with 9 output partitions
+24/01/23 19:09:12 INFO DAGScheduler: Final stage: ShuffleMapStage 23 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:12 INFO DAGScheduler: Parents of final stage: List()
+24/01/23 19:09:12 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:12 INFO DAGScheduler: Submitting ShuffleMapStage 23 (MapPartitionsRDD[56] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:12 INFO MemoryStore: Block broadcast_16 stored as values in memory (estimated size 91.7 KiB, free 364.1 MiB)
+24/01/23 19:09:12 INFO MemoryStore: Block broadcast_16_piece0 stored as bytes in memory (estimated size 36.4 KiB, free 364.1 MiB)
+24/01/23 19:09:12 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on okeanos-master:37128 (size: 36.4 KiB, free: 366.0 MiB)
+24/01/23 19:09:12 INFO SparkContext: Created broadcast 16 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:12 INFO DAGScheduler: Submitting 9 missing tasks from ShuffleMapStage 23 (MapPartitionsRDD[56] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7, 8))
+24/01/23 19:09:12 INFO YarnScheduler: Adding task set 23.0 with 9 tasks resource profile 0
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 1.0 in stage 23.0 (TID 43) (okeanos-worker, executor 3, partition 1, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 2.0 in stage 23.0 (TID 44) (okeanos-worker, executor 1, partition 2, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 4.0 in stage 23.0 (TID 45) (okeanos-master, executor 2, partition 4, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 0.0 in stage 23.0 (TID 46) (okeanos-master, executor 4, partition 0, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on okeanos-worker:39598 (size: 36.4 KiB, free: 319.3 MiB)
+24/01/23 19:09:12 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on okeanos-worker:37615 (size: 36.4 KiB, free: 330.9 MiB)
+24/01/23 19:09:12 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on okeanos-master:40905 (size: 36.4 KiB, free: 313.4 MiB)
+24/01/23 19:09:12 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on okeanos-master:32806 (size: 36.4 KiB, free: 318.8 MiB)
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 3.0 in stage 23.0 (TID 47) (okeanos-worker, executor 1, partition 3, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 2.0 in stage 23.0 (TID 44) in 254 ms on okeanos-worker (executor 1) (1/9)
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 8.0 in stage 23.0 (TID 48) (okeanos-worker, executor 1, partition 8, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 3.0 in stage 23.0 (TID 47) in 138 ms on okeanos-worker (executor 1) (2/9)
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 5.0 in stage 23.0 (TID 49) (okeanos-worker, executor 3, partition 5, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 1.0 in stage 23.0 (TID 43) in 402 ms on okeanos-worker (executor 3) (3/9)
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 8.0 in stage 23.0 (TID 48) in 67 ms on okeanos-worker (executor 1) (4/9)
+24/01/23 19:09:12 INFO TaskSetManager: Starting task 6.0 in stage 23.0 (TID 50) (okeanos-master, executor 4, partition 6, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 0.0 in stage 23.0 (TID 46) in 468 ms on okeanos-master (executor 4) (5/9)
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 5.0 in stage 23.0 (TID 49) in 92 ms on okeanos-worker (executor 3) (6/9)
+24/01/23 19:09:12 INFO TaskSetManager: Finished task 6.0 in stage 23.0 (TID 50) in 116 ms on okeanos-master (executor 4) (7/9)
+24/01/23 19:09:13 INFO TaskSetManager: Starting task 7.0 in stage 23.0 (TID 51) (okeanos-master, executor 2, partition 7, PROCESS_LOCAL, 8317 bytes) 
+24/01/23 19:09:13 INFO TaskSetManager: Finished task 4.0 in stage 23.0 (TID 45) in 643 ms on okeanos-master (executor 2) (8/9)
+24/01/23 19:09:13 INFO TaskSetManager: Finished task 7.0 in stage 23.0 (TID 51) in 95 ms on okeanos-master (executor 2) (9/9)
+24/01/23 19:09:13 INFO YarnScheduler: Removed TaskSet 23.0, whose tasks have all completed, from pool 
+24/01/23 19:09:13 INFO DAGScheduler: ShuffleMapStage 23 (showString at NativeMethodAccessorImpl.java:0) finished in 0.748 s
+24/01/23 19:09:13 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:09:13 INFO DAGScheduler: running: Set()
+24/01/23 19:09:13 INFO DAGScheduler: waiting: Set()
+24/01/23 19:09:13 INFO DAGScheduler: failed: Set()
+24/01/23 19:09:13 INFO ShufflePartitionsUtil: For shuffle(5), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:09:13 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+24/01/23 19:09:13 INFO CodeGenerator: Code generated in 46.919024 ms
+24/01/23 19:09:13 INFO DAGScheduler: Registering RDD 59 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 6
+24/01/23 19:09:13 INFO DAGScheduler: Got map stage job 12 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:09:13 INFO DAGScheduler: Final stage: ShuffleMapStage 25 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:13 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 24)
+24/01/23 19:09:13 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:13 INFO DAGScheduler: Submitting ShuffleMapStage 25 (MapPartitionsRDD[59] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:13 INFO MemoryStore: Block broadcast_17 stored as values in memory (estimated size 94.3 KiB, free 364.0 MiB)
+24/01/23 19:09:13 INFO MemoryStore: Block broadcast_17_piece0 stored as bytes in memory (estimated size 37.5 KiB, free 364.0 MiB)
+24/01/23 19:09:13 INFO BlockManagerInfo: Added broadcast_17_piece0 in memory on okeanos-master:37128 (size: 37.5 KiB, free: 365.9 MiB)
+24/01/23 19:09:13 INFO SparkContext: Created broadcast 17 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:13 INFO DAGScheduler: Submitting 1 missing tasks from ShuffleMapStage 25 (MapPartitionsRDD[59] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:09:13 INFO YarnScheduler: Adding task set 25.0 with 1 tasks resource profile 0
+24/01/23 19:09:13 INFO TaskSetManager: Starting task 0.0 in stage 25.0 (TID 52) (okeanos-master, executor 2, partition 0, NODE_LOCAL, 7615 bytes) 
+24/01/23 19:09:13 INFO BlockManagerInfo: Added broadcast_17_piece0 in memory on okeanos-master:40905 (size: 37.5 KiB, free: 313.4 MiB)
+24/01/23 19:09:13 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 5 to 192.168.0.1:49550
+24/01/23 19:09:13 INFO TaskSetManager: Finished task 0.0 in stage 25.0 (TID 52) in 421 ms on okeanos-master (executor 2) (1/1)
+24/01/23 19:09:13 INFO YarnScheduler: Removed TaskSet 25.0, whose tasks have all completed, from pool 
+24/01/23 19:09:13 INFO DAGScheduler: ShuffleMapStage 25 (showString at NativeMethodAccessorImpl.java:0) finished in 0.449 s
+24/01/23 19:09:13 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:09:13 INFO DAGScheduler: running: Set()
+24/01/23 19:09:13 INFO DAGScheduler: waiting: Set()
+24/01/23 19:09:13 INFO DAGScheduler: failed: Set()
+24/01/23 19:09:13 INFO ShufflePartitionsUtil: For shuffle(4, 6), advisory target size: 67108864, actual target size 13405168, minimum partition size: 1048576
+24/01/23 19:09:13 INFO CodeGenerator: Code generated in 13.574337 ms
+24/01/23 19:09:13 INFO DAGScheduler: Got job 13 (showString at NativeMethodAccessorImpl.java:0) with 4 output partitions
+24/01/23 19:09:13 INFO DAGScheduler: Final stage: ResultStage 29 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:13 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 27, ShuffleMapStage 28)
+24/01/23 19:09:13 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:13 INFO DAGScheduler: Submitting ResultStage 29 (AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+   +- ShuffledHashJoin [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))], [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))], Inner, BuildRight
+      :- Exchange hashpartitioning(DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412)), 200), ENSURE_REQUIREMENTS, [plan_id=105]
+      :  +- Filter (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+      :     +- InMemoryTableScan [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+      :           +- InMemoryRelation [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapo... MapPartitionsRDD[65] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:13 INFO MemoryStore: Block broadcast_18 stored as values in memory (estimated size 100.7 KiB, free 363.9 MiB)
+24/01/23 19:09:13 INFO MemoryStore: Block broadcast_18_piece0 stored as bytes in memory (estimated size 41.1 KiB, free 363.8 MiB)
+24/01/23 19:09:13 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on okeanos-master:37128 (size: 41.1 KiB, free: 365.9 MiB)
+24/01/23 19:09:13 INFO SparkContext: Created broadcast 18 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:13 INFO DAGScheduler: Submitting 4 missing tasks from ResultStage 29 (AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+   +- ShuffledHashJoin [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))], [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))], Inner, BuildRight
+      :- Exchange hashpartitioning(DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412)), 200), ENSURE_REQUIREMENTS, [plan_id=105]
+      :  +- Filter (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+      :     +- InMemoryTableScan [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+      :           +- InMemoryRelation [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapo... MapPartitionsRDD[65] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3))
+24/01/23 19:09:13 INFO YarnScheduler: Adding task set 29.0 with 4 tasks resource profile 0
+24/01/23 19:09:13 INFO TaskSetManager: Starting task 0.0 in stage 29.0 (TID 53) (okeanos-master, executor 2, partition 0, NODE_LOCAL, 7908 bytes) 
+24/01/23 19:09:13 INFO TaskSetManager: Starting task 1.0 in stage 29.0 (TID 54) (okeanos-master, executor 4, partition 1, NODE_LOCAL, 7908 bytes) 
+24/01/23 19:09:13 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on okeanos-master:40905 (size: 41.1 KiB, free: 313.3 MiB)
+24/01/23 19:09:13 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on okeanos-master:32806 (size: 41.1 KiB, free: 318.7 MiB)
+24/01/23 19:09:13 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 4 to 192.168.0.1:49550
+24/01/23 19:09:13 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 6 to 192.168.0.1:49550
+24/01/23 19:09:13 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 4 to 192.168.0.1:49552
+24/01/23 19:09:14 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 6 to 192.168.0.1:49552
+24/01/23 19:09:14 INFO BlockManagerInfo: Added rdd_65_0 in memory on okeanos-master:40905 (size: 291.6 KiB, free: 313.1 MiB)
+24/01/23 19:09:14 INFO TaskSetManager: Starting task 2.0 in stage 29.0 (TID 55) (okeanos-master, executor 2, partition 2, NODE_LOCAL, 7908 bytes) 
+24/01/23 19:09:14 INFO TaskSetManager: Finished task 0.0 in stage 29.0 (TID 53) in 740 ms on okeanos-master (executor 2) (1/4)
+24/01/23 19:09:14 INFO BlockManagerInfo: Added rdd_65_1 in memory on okeanos-master:32806 (size: 294.0 KiB, free: 318.4 MiB)
+24/01/23 19:09:14 INFO TaskSetManager: Starting task 3.0 in stage 29.0 (TID 56) (okeanos-master, executor 4, partition 3, NODE_LOCAL, 7908 bytes) 
+24/01/23 19:09:14 INFO TaskSetManager: Finished task 1.0 in stage 29.0 (TID 54) in 833 ms on okeanos-master (executor 4) (2/4)
+24/01/23 19:09:14 INFO BlockManagerInfo: Added rdd_65_2 in memory on okeanos-master:40905 (size: 296.3 KiB, free: 312.8 MiB)
+24/01/23 19:09:14 INFO TaskSetManager: Finished task 2.0 in stage 29.0 (TID 55) in 389 ms on okeanos-master (executor 2) (3/4)
+24/01/23 19:09:14 INFO BlockManagerInfo: Added rdd_65_3 in memory on okeanos-master:32806 (size: 298.8 KiB, free: 318.2 MiB)
+24/01/23 19:09:14 INFO TaskSetManager: Finished task 3.0 in stage 29.0 (TID 56) in 362 ms on okeanos-master (executor 4) (4/4)
+24/01/23 19:09:14 INFO YarnScheduler: Removed TaskSet 29.0, whose tasks have all completed, from pool 
+24/01/23 19:09:14 INFO DAGScheduler: ResultStage 29 (showString at NativeMethodAccessorImpl.java:0) finished in 1.213 s
+24/01/23 19:09:14 INFO DAGScheduler: Job 13 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:09:14 INFO YarnScheduler: Killing all running tasks in stage 29: Stage finished
+24/01/23 19:09:15 INFO DAGScheduler: Registering RDD 70 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 7
+24/01/23 19:09:15 INFO DAGScheduler: Got map stage job 14 (showString at NativeMethodAccessorImpl.java:0) with 4 output partitions
+24/01/23 19:09:15 INFO DAGScheduler: Final stage: ShuffleMapStage 33 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:15 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 31, ShuffleMapStage 32)
+24/01/23 19:09:15 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:15 INFO DAGScheduler: Submitting ShuffleMapStage 33 (MapPartitionsRDD[70] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_19 stored as values in memory (estimated size 119.4 KiB, free 363.7 MiB)
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_19_piece0 stored as bytes in memory (estimated size 48.5 KiB, free 363.7 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on okeanos-master:37128 (size: 48.5 KiB, free: 365.8 MiB)
+24/01/23 19:09:15 INFO SparkContext: Created broadcast 19 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:15 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 33 (MapPartitionsRDD[70] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3))
+24/01/23 19:09:15 INFO YarnScheduler: Adding task set 33.0 with 4 tasks resource profile 0
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 0.0 in stage 33.0 (TID 57) (okeanos-master, executor 2, partition 0, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 1.0 in stage 33.0 (TID 58) (okeanos-master, executor 4, partition 1, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on okeanos-master:40905 (size: 48.5 KiB, free: 312.7 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on okeanos-master:32806 (size: 48.5 KiB, free: 318.1 MiB)
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 2.0 in stage 33.0 (TID 59) (okeanos-master, executor 2, partition 2, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO TaskSetManager: Finished task 0.0 in stage 33.0 (TID 57) in 157 ms on okeanos-master (executor 2) (1/4)
+24/01/23 19:09:15 INFO TaskSetManager: Finished task 2.0 in stage 33.0 (TID 59) in 68 ms on okeanos-master (executor 2) (2/4)
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 3.0 in stage 33.0 (TID 60) (okeanos-master, executor 4, partition 3, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO TaskSetManager: Finished task 1.0 in stage 33.0 (TID 58) in 268 ms on okeanos-master (executor 4) (3/4)
+24/01/23 19:09:15 INFO TaskSetManager: Finished task 3.0 in stage 33.0 (TID 60) in 70 ms on okeanos-master (executor 4) (4/4)
+24/01/23 19:09:15 INFO YarnScheduler: Removed TaskSet 33.0, whose tasks have all completed, from pool 
+24/01/23 19:09:15 INFO DAGScheduler: ShuffleMapStage 33 (showString at NativeMethodAccessorImpl.java:0) finished in 0.345 s
+24/01/23 19:09:15 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:09:15 INFO DAGScheduler: running: Set()
+24/01/23 19:09:15 INFO DAGScheduler: waiting: Set()
+24/01/23 19:09:15 INFO DAGScheduler: failed: Set()
+24/01/23 19:09:15 INFO ShufflePartitionsUtil: For shuffle(7), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:09:15 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+24/01/23 19:09:15 INFO SparkContext: Starting job: showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_10_piece0 on okeanos-master:37128 in memory (size: 7.7 KiB, free: 365.8 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_10_piece0 on okeanos-master:40905 in memory (size: 7.7 KiB, free: 312.7 MiB)
+24/01/23 19:09:15 INFO DAGScheduler: Got job 15 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:09:15 INFO DAGScheduler: Final stage: ResultStage 38 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:15 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 37)
+24/01/23 19:09:15 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:15 INFO DAGScheduler: Submitting ResultStage 38 (MapPartitionsRDD[74] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_20 stored as values in memory (estimated size 122.1 KiB, free 363.6 MiB)
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_20_piece0 stored as bytes in memory (estimated size 48.0 KiB, free 363.5 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_20_piece0 in memory on okeanos-master:37128 (size: 48.0 KiB, free: 365.8 MiB)
+24/01/23 19:09:15 INFO SparkContext: Created broadcast 20 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:15 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 38 (MapPartitionsRDD[74] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:09:15 INFO YarnScheduler: Adding task set 38.0 with 1 tasks resource profile 0
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 0.0 in stage 38.0 (TID 61) (okeanos-master, executor 2, partition 0, NODE_LOCAL, 7626 bytes) 
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_20_piece0 in memory on okeanos-master:40905 (size: 48.0 KiB, free: 312.7 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_7_piece0 on okeanos-master:37128 in memory (size: 35.7 KiB, free: 365.8 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_7_piece0 on okeanos-worker:39598 in memory (size: 35.7 KiB, free: 319.3 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_18_piece0 on okeanos-master:40905 in memory (size: 41.1 KiB, free: 312.7 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_18_piece0 on okeanos-master:37128 in memory (size: 41.1 KiB, free: 365.9 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_18_piece0 on okeanos-master:32806 in memory (size: 41.1 KiB, free: 318.1 MiB)
+24/01/23 19:09:15 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 7 to 192.168.0.1:49550
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_15_piece0 on okeanos-worker:39598 in memory (size: 30.7 KiB, free: 319.3 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_15_piece0 on okeanos-worker:37615 in memory (size: 30.7 KiB, free: 331.0 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_15_piece0 on okeanos-master:32806 in memory (size: 30.7 KiB, free: 318.2 MiB)
+24/01/23 19:09:15 INFO TaskSetManager: Finished task 0.0 in stage 38.0 (TID 61) in 158 ms on okeanos-master (executor 2) (1/1)
+24/01/23 19:09:15 INFO YarnScheduler: Removed TaskSet 38.0, whose tasks have all completed, from pool 
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_15_piece0 on okeanos-master:37128 in memory (size: 30.7 KiB, free: 365.9 MiB)
+24/01/23 19:09:15 INFO DAGScheduler: ResultStage 38 (showString at NativeMethodAccessorImpl.java:0) finished in 0.189 s
+24/01/23 19:09:15 INFO DAGScheduler: Job 15 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:09:15 INFO YarnScheduler: Killing all running tasks in stage 38: Stage finished
+24/01/23 19:09:15 INFO DAGScheduler: Job 15 finished: showString at NativeMethodAccessorImpl.java:0, took 0.195946 s
+24/01/23 19:09:15 INFO MapPartitionsRDD: Removing RDD 46 from persistence list
+24/01/23 19:09:15 INFO BlockManager: Removing RDD 46
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_17_piece0 on okeanos-master:37128 in memory (size: 37.5 KiB, free: 365.9 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_17_piece0 on okeanos-master:40905 in memory (size: 37.5 KiB, free: 365.4 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_19_piece0 on okeanos-master:37128 in memory (size: 48.5 KiB, free: 366.0 MiB)
+24/01/23 19:09:15 INFO DAGScheduler: Registering RDD 79 (showString at NativeMethodAccessorImpl.java:0) as input to shuffle 8
+24/01/23 19:09:15 INFO DAGScheduler: Got map stage job 16 (showString at NativeMethodAccessorImpl.java:0) with 4 output partitions
+24/01/23 19:09:15 INFO DAGScheduler: Final stage: ShuffleMapStage 42 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:15 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 40, ShuffleMapStage 41)
+24/01/23 19:09:15 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:15 INFO DAGScheduler: Submitting ShuffleMapStage 42 (MapPartitionsRDD[79] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_19_piece0 on okeanos-master:40905 in memory (size: 48.5 KiB, free: 365.5 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_19_piece0 on okeanos-master:32806 in memory (size: 48.5 KiB, free: 365.6 MiB)
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_21 stored as values in memory (estimated size 119.8 KiB, free 364.1 MiB)
+24/01/23 19:09:15 INFO MemoryStore: Block broadcast_21_piece0 stored as bytes in memory (estimated size 48.5 KiB, free 364.0 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on okeanos-master:37128 (size: 48.5 KiB, free: 365.9 MiB)
+24/01/23 19:09:15 INFO SparkContext: Created broadcast 21 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:15 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 42 (MapPartitionsRDD[79] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3))
+24/01/23 19:09:15 INFO YarnScheduler: Adding task set 42.0 with 4 tasks resource profile 0
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 0.0 in stage 42.0 (TID 62) (okeanos-master, executor 2, partition 0, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO TaskSetManager: Starting task 1.0 in stage 42.0 (TID 63) (okeanos-master, executor 4, partition 1, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on okeanos-master:40905 (size: 48.5 KiB, free: 365.4 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_13_piece0 on okeanos-master:37128 in memory (size: 27.1 KiB, free: 366.0 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_13_piece0 on okeanos-worker:39598 in memory (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_13_piece0 on okeanos-worker:37615 in memory (size: 27.1 KiB, free: 366.1 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_13_piece0 on okeanos-master:40905 in memory (size: 27.1 KiB, free: 365.5 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Removed broadcast_13_piece0 on okeanos-master:32806 in memory (size: 27.1 KiB, free: 365.6 MiB)
+24/01/23 19:09:15 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on okeanos-master:32806 (size: 48.5 KiB, free: 365.5 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_14_piece0 on okeanos-worker:37615 in memory (size: 27.1 KiB, free: 366.2 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_14_piece0 on okeanos-master:37128 in memory (size: 27.1 KiB, free: 366.0 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_14_piece0 on okeanos-master:32806 in memory (size: 27.1 KiB, free: 365.6 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_14_piece0 on okeanos-master:40905 in memory (size: 27.1 KiB, free: 365.5 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_8_piece0 on okeanos-worker:39598 in memory (size: 36.5 KiB, free: 366.2 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_8_piece0 on okeanos-master:37128 in memory (size: 36.5 KiB, free: 366.0 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_16_piece0 on okeanos-worker:37615 in memory (size: 36.4 KiB, free: 366.2 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_16_piece0 on okeanos-worker:39598 in memory (size: 36.4 KiB, free: 366.2 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_16_piece0 on okeanos-master:37128 in memory (size: 36.4 KiB, free: 366.1 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_16_piece0 on okeanos-master:40905 in memory (size: 36.4 KiB, free: 365.5 MiB)
+24/01/23 19:09:16 INFO TaskSetManager: Starting task 3.0 in stage 42.0 (TID 64) (okeanos-master, executor 4, partition 3, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:16 INFO TaskSetManager: Starting task 2.0 in stage 42.0 (TID 65) (okeanos-master, executor 2, partition 2, PROCESS_LOCAL, 7897 bytes) 
+24/01/23 19:09:16 INFO TaskSetManager: Finished task 0.0 in stage 42.0 (TID 62) in 289 ms on okeanos-master (executor 2) (1/4)
+24/01/23 19:09:16 INFO TaskSetManager: Finished task 1.0 in stage 42.0 (TID 63) in 292 ms on okeanos-master (executor 4) (2/4)
+24/01/23 19:09:16 INFO BlockManagerInfo: Removed broadcast_16_piece0 on okeanos-master:32806 in memory (size: 36.4 KiB, free: 365.6 MiB)
+24/01/23 19:09:16 INFO BlockManager: Removing RDD 16
+24/01/23 19:09:16 INFO TaskSetManager: Finished task 2.0 in stage 42.0 (TID 65) in 81 ms on okeanos-master (executor 2) (3/4)
+24/01/23 19:09:16 INFO TaskSetManager: Finished task 3.0 in stage 42.0 (TID 64) in 110 ms on okeanos-master (executor 4) (4/4)
+24/01/23 19:09:16 INFO YarnScheduler: Removed TaskSet 42.0, whose tasks have all completed, from pool 
+24/01/23 19:09:16 INFO DAGScheduler: ShuffleMapStage 42 (showString at NativeMethodAccessorImpl.java:0) finished in 0.412 s
+24/01/23 19:09:16 INFO DAGScheduler: looking for newly runnable stages
+24/01/23 19:09:16 INFO DAGScheduler: running: Set()
+24/01/23 19:09:16 INFO DAGScheduler: waiting: Set()
+24/01/23 19:09:16 INFO DAGScheduler: failed: Set()
+24/01/23 19:09:16 INFO ShufflePartitionsUtil: For shuffle(8), advisory target size: 67108864, actual target size 1048576, minimum partition size: 1048576
+24/01/23 19:09:16 INFO HashAggregateExec: spark.sql.codegen.aggregate.map.twolevel.enabled is set to true, but current version of codegened fast hashmap does not support this aggregate.
+24/01/23 19:09:16 INFO SparkContext: Starting job: showString at NativeMethodAccessorImpl.java:0
+24/01/23 19:09:16 INFO DAGScheduler: Got job 17 (showString at NativeMethodAccessorImpl.java:0) with 1 output partitions
+24/01/23 19:09:16 INFO DAGScheduler: Final stage: ResultStage 47 (showString at NativeMethodAccessorImpl.java:0)
+24/01/23 19:09:16 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 46)
+24/01/23 19:09:16 INFO DAGScheduler: Missing parents: List()
+24/01/23 19:09:16 INFO DAGScheduler: Submitting ResultStage 47 (MapPartitionsRDD[83] at showString at NativeMethodAccessorImpl.java:0), which has no missing parents
+24/01/23 19:09:16 INFO MemoryStore: Block broadcast_22 stored as values in memory (estimated size 122.0 KiB, free 364.3 MiB)
+24/01/23 19:09:16 INFO MemoryStore: Block broadcast_22_piece0 stored as bytes in memory (estimated size 47.9 KiB, free 364.3 MiB)
+24/01/23 19:09:16 INFO BlockManagerInfo: Added broadcast_22_piece0 in memory on okeanos-master:37128 (size: 47.9 KiB, free: 366.0 MiB)
+24/01/23 19:09:16 INFO SparkContext: Created broadcast 22 from broadcast at DAGScheduler.scala:1580
+24/01/23 19:09:16 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 47 (MapPartitionsRDD[83] at showString at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0))
+24/01/23 19:09:16 INFO YarnScheduler: Adding task set 47.0 with 1 tasks resource profile 0
+24/01/23 19:09:16 INFO TaskSetManager: Starting task 0.0 in stage 47.0 (TID 66) (okeanos-master, executor 4, partition 0, NODE_LOCAL, 7626 bytes) 
+24/01/23 19:09:16 INFO BlockManagerInfo: Added broadcast_22_piece0 in memory on okeanos-master:32806 (size: 47.9 KiB, free: 365.6 MiB)
+24/01/23 19:09:16 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 8 to 192.168.0.1:49552
+24/01/23 19:09:16 INFO TaskSetManager: Finished task 0.0 in stage 47.0 (TID 66) in 112 ms on okeanos-master (executor 4) (1/1)
+24/01/23 19:09:16 INFO YarnScheduler: Removed TaskSet 47.0, whose tasks have all completed, from pool 
+24/01/23 19:09:16 INFO DAGScheduler: ResultStage 47 (showString at NativeMethodAccessorImpl.java:0) finished in 0.137 s
+24/01/23 19:09:16 INFO DAGScheduler: Job 17 is finished. Cancelling potential speculative or zombie tasks for this job
+24/01/23 19:09:16 INFO YarnScheduler: Killing all running tasks in stage 47: Stage finished
+24/01/23 19:09:16 INFO DAGScheduler: Job 17 finished: showString at NativeMethodAccessorImpl.java:0, took 0.146050 s
+24/01/23 19:09:16 INFO MapPartitionsRDD: Removing RDD 65 from persistence list
+24/01/23 19:09:16 INFO SparkContext: SparkContext is stopping with exitCode 0.
+24/01/23 19:09:16 INFO BlockManager: Removing RDD 65
+24/01/23 19:09:16 INFO SparkUI: Stopped Spark web UI at http://okeanos-master:4040
+24/01/23 19:09:16 INFO YarnClientSchedulerBackend: Interrupting monitor thread
+24/01/23 19:09:16 INFO YarnClientSchedulerBackend: Shutting down all executors
+24/01/23 19:09:16 INFO YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+24/01/23 19:09:16 INFO YarnClientSchedulerBackend: YARN client scheduler backend Stopped
+24/01/23 19:09:16 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+24/01/23 19:09:16 INFO MemoryStore: MemoryStore cleared
+24/01/23 19:09:16 INFO BlockManager: BlockManager stopped
+24/01/23 19:09:16 INFO BlockManagerMaster: BlockManagerMaster stopped
+24/01/23 19:09:16 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+24/01/23 19:09:16 INFO SparkContext: Successfully stopped SparkContext
+24/01/23 19:09:17 INFO ShutdownHookManager: Shutdown hook called
+24/01/23 19:09:17 INFO ShutdownHookManager: Deleting directory /tmp/spark-6d74586e-55f2-4387-bbb7-abff4e976af9
+24/01/23 19:09:17 INFO ShutdownHookManager: Deleting directory /tmp/spark-0e0b6dc9-5417-4264-b441-924e0f267258
+24/01/23 19:09:17 INFO ShutdownHookManager: Deleting directory /tmp/spark-6d74586e-55f2-4387-bbb7-abff4e976af9/pyspark-2c40c5e3-b747-47b2-8ffc-705757c021bb

@@ -1,0 +1,40 @@
+[91mPREPROCESSING: [00mDataset 1 (2010 - 2020) has 2122469 rows
+
+[91mPREPROCESSING: [00mDataset 2 (2020 - Present) has 879106 rows
+
+[91mPREPROCESSING: [00mThe merged dataset (2010 - Present) has 3001575 rows (0 duplicate rows were dropped)
+
+[91mPREPROCESSING: [00mThe contents of the merged dataset (2010 - Present) were successfully written to disk
+
+[91mPREPROCESSING: [00mThe merged dataset (2010 - Present) has the following schema:
+root
+ |-- DR_NO: integer (nullable = true)
+ |-- Date Rptd: date (nullable = true)
+ |-- DATE OCC: date (nullable = true)
+ |-- TIME OCC: string (nullable = true)
+ |-- AREA: integer (nullable = true)
+ |-- AREA NAME: string (nullable = true)
+ |-- Rpt Dist No: integer (nullable = true)
+ |-- Part 1-2: string (nullable = true)
+ |-- Crm Cd: integer (nullable = true)
+ |-- Crm Cd Desc: string (nullable = true)
+ |-- Mocodes: string (nullable = true)
+ |-- Vict Age: integer (nullable = true)
+ |-- Vict Sex: string (nullable = true)
+ |-- Vict Descent: string (nullable = true)
+ |-- Premis Cd: integer (nullable = true)
+ |-- Premis Desc: string (nullable = true)
+ |-- Weapon Used Cd: integer (nullable = true)
+ |-- Weapon Desc: string (nullable = true)
+ |-- Status: string (nullable = true)
+ |-- Status Desc: string (nullable = true)
+ |-- Crm Cd 1: integer (nullable = true)
+ |-- Crm Cd 2: integer (nullable = true)
+ |-- Crm Cd 3: integer (nullable = true)
+ |-- Crm Cd 4: integer (nullable = true)
+ |-- LOCATION: string (nullable = true)
+ |-- Cross Street: string (nullable = true)
+ |-- LAT: double (nullable = true)
+ |-- LON: double (nullable = true)
+
+

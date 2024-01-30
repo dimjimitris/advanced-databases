@@ -1,0 +1,604 @@
+[91mQ3: [00mQuery execution plan (merge):
+== Physical Plan ==
+AdaptiveSparkPlan (93)
++- Project (92)
+   +- Sort (91)
+      +- Exchange (90)
+         +- HashAggregate (89)
+            +- Exchange (88)
+               +- HashAggregate (87)
+                  +- Project (86)
+                     +- SortMergeJoin Inner (85)
+                        :- Sort (20)
+                        :  +- Exchange (19)
+                        :     +- Project (18)
+                        :        +- SortMergeJoin Inner (17)
+                        :           :- Sort (5)
+                        :           :  +- Exchange (4)
+                        :           :     +- Project (3)
+                        :           :        +- Filter (2)
+                        :           :           +- Scan csv  (1)
+                        :           +- Sort (16)
+                        :              +- Exchange (15)
+                        :                 +- Filter (14)
+                        :                    +- SortAggregate (13)
+                        :                       +- Sort (12)
+                        :                          +- Exchange (11)
+                        :                             +- SortAggregate (10)
+                        :                                +- Sort (9)
+                        :                                   +- Project (8)
+                        :                                      +- Filter (7)
+                        :                                         +- Scan csv  (6)
+                        +- Sort (84)
+                           +- HashAggregate (83)
+                              +- Exchange (82)
+                                 +- HashAggregate (81)
+                                    +- Union (80)
+                                       :- Filter (54)
+                                       :  +- TakeOrderedAndProject (53)
+                                       :     +- InMemoryTableScan (21)
+                                       :           +- InMemoryRelation (22)
+                                       :                 +- AdaptiveSparkPlan (52)
+                                       :                    +- Project (51)
+                                       :                       +- SortMergeJoin Inner (50)
+                                       :                          :- Sort (27)
+                                       :                          :  +- Exchange (26)
+                                       :                          :     +- Project (25)
+                                       :                          :        +- Filter (24)
+                                       :                          :           +- Scan csv  (23)
+                                       :                          +- Sort (49)
+                                       :                             +- HashAggregate (48)
+                                       :                                +- Exchange (47)
+                                       :                                   +- HashAggregate (46)
+                                       :                                      +- Project (45)
+                                       :                                         +- SortMergeJoin Inner (44)
+                                       :                                            :- Sort (32)
+                                       :                                            :  +- Exchange (31)
+                                       :                                            :     +- Project (30)
+                                       :                                            :        +- Filter (29)
+                                       :                                            :           +- Scan csv  (28)
+                                       :                                            +- Sort (43)
+                                       :                                               +- Exchange (42)
+                                       :                                                  +- Filter (41)
+                                       :                                                     +- SortAggregate (40)
+                                       :                                                        +- Sort (39)
+                                       :                                                           +- Exchange (38)
+                                       :                                                              +- SortAggregate (37)
+                                       :                                                                 +- Sort (36)
+                                       :                                                                    +- Project (35)
+                                       :                                                                       +- Filter (34)
+                                       :                                                                          +- Scan csv  (33)
+                                       +- Filter (79)
+                                          +- TakeOrderedAndProject (78)
+                                             +- InMemoryTableScan (55)
+                                                   +- InMemoryRelation (56)
+                                                         +- AdaptiveSparkPlan (77)
+                                                            +- Project (76)
+                                                               +- SortMergeJoin Inner (75)
+                                                                  :- Sort (58)
+                                                                  :  +- Exchange (57)
+                                                                  :     +- Project (25)
+                                                                  :        +- Filter (24)
+                                                                  :           +- Scan csv  (23)
+                                                                  +- Sort (74)
+                                                                     +- HashAggregate (73)
+                                                                        +- Exchange (72)
+                                                                           +- HashAggregate (71)
+                                                                              +- Project (70)
+                                                                                 +- SortMergeJoin Inner (69)
+                                                                                    :- Sort (60)
+                                                                                    :  +- Exchange (59)
+                                                                                    :     +- Project (30)
+                                                                                    :        +- Filter (29)
+                                                                                    :           +- Scan csv  (28)
+                                                                                    +- Sort (68)
+                                                                                       +- Exchange (67)
+                                                                                          +- Filter (66)
+                                                                                             +- SortAggregate (65)
+                                                                                                +- Sort (64)
+                                                                                                   +- Exchange (63)
+                                                                                                      +- SortAggregate (62)
+                                                                                                         +- Sort (61)
+                                                                                                            +- Project (35)
+                                                                                                               +- Filter (34)
+                                                                                                                  +- Scan csv  (33)
+
+
+(1) Scan csv 
+Output [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(DATE OCC), IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)]
+ReadSchema: struct<DATE OCC:date,Vict Descent:string,LAT:double,LON:double>
+
+(2) Filter
+Input [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+Condition : ((((isnotnull(DATE OCC#13) AND (year(DATE OCC#13) = 2015)) AND isnotnull(Vict Descent#24)) AND isnotnull(LAT#37)) AND isnotnull(LON#38))
+
+(3) Project
+Output [3]: [Vict Descent#24, LAT#37, LON#38]
+Input [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+
+(4) Exchange
+Input [3]: [Vict Descent#24, LAT#37, LON#38]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38)), 200), ENSURE_REQUIREMENTS, [plan_id=186]
+
+(5) Sort
+Input [3]: [Vict Descent#24, LAT#37, LON#38]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#38)) ASC NULLS FIRST], false, 0
+
+(6) Scan csv 
+Output [3]: [LAT#0, LON#1, ZIPcode#2]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/revgecoding.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON)]
+ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
+
+(7) Filter
+Input [3]: [LAT#0, LON#1, ZIPcode#2]
+Condition : (isnotnull(LAT#0) AND isnotnull(LON#1))
+
+(8) Project
+Output [3]: [LAT#0, LON#1, ZIPcode#2 AS Zip Code#6]
+Input [3]: [LAT#0, LON#1, ZIPcode#2]
+
+(9) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0 ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1 ASC NULLS FIRST], false, 0
+
+(10) SortAggregate
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1]
+Functions [1]: [partial_first(Zip Code#6, false)]
+Aggregate Attributes [2]: [first#338, valueSet#339]
+Results [4]: [LAT#0, LON#1, first#340, valueSet#341]
+
+(11) Exchange
+Input [4]: [LAT#0, LON#1, first#340, valueSet#341]
+Arguments: hashpartitioning(LAT#0, LON#1, 200), ENSURE_REQUIREMENTS, [plan_id=180]
+
+(12) Sort
+Input [4]: [LAT#0, LON#1, first#340, valueSet#341]
+Arguments: [LAT#0 ASC NULLS FIRST, LON#1 ASC NULLS FIRST], false, 0
+
+(13) SortAggregate
+Input [4]: [LAT#0, LON#1, first#340, valueSet#341]
+Keys [2]: [LAT#0, LON#1]
+Functions [1]: [first(Zip Code#6, false)]
+Aggregate Attributes [1]: [first(Zip Code#6)()#314]
+Results [3]: [LAT#0, LON#1, first(Zip Code#6)()#314 AS Zip Code#315]
+
+(14) Filter
+Input [3]: [LAT#0, LON#1, Zip Code#315]
+Condition : isnotnull(Zip Code#315)
+
+(15) Exchange
+Input [3]: [LAT#0, LON#1, Zip Code#315]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1)), 200), ENSURE_REQUIREMENTS, [plan_id=187]
+
+(16) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#315]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) ASC NULLS FIRST], false, 0
+
+(17) SortMergeJoin
+Left keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38))]
+Right keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1))]
+Join type: Inner
+Join condition: None
+
+(18) Project
+Output [2]: [Vict Descent#24, Zip Code#315]
+Input [6]: [Vict Descent#24, LAT#37, LON#38, LAT#0, LON#1, Zip Code#315]
+
+(19) Exchange
+Input [2]: [Vict Descent#24, Zip Code#315]
+Arguments: hashpartitioning(Zip Code#315, 200), ENSURE_REQUIREMENTS, [plan_id=196]
+
+(20) Sort
+Input [2]: [Vict Descent#24, Zip Code#315]
+Arguments: [Zip Code#315 ASC NULLS FIRST], false, 0
+
+(21) InMemoryTableScan
+Output [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: [Zip Code#97, Estimated Median Income#103]
+
+(22) InMemoryRelation
+Arguments: [Zip Code#97, Estimated Median Income#103], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@6b01e14a,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Zip Code#97, Estimated Median Income#103]
+   +- SortMergeJoin [Zip Code#97], [Zip Code#114], Inner
+      :- Sort [Zip Code#97 ASC NULLS FIRST], false, 0
+      :  +- Exchange hashpartitioning(Zip Code#97, 200), ENSURE_REQUIREMENTS, [plan_id=79]
+      :     +- Project [Zip Code#97, cast(regexp_replace(Estimated Median Income#99, [\$\,], , 1) as int) AS Estimated Median Income#103]
+      :        +- Filter isnotnull(Zip Code#97)
+      :           +- FileScan csv [Zip Code#97,Estimated Median Income#99] Batched: false, DataFilters: [isnotnull(Zip Code#97)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LA_income_2015.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Zip Code)], ReadSchema: struct<Zip Code:string,Estimated Median Income:string>
+      +- Sort [Zip Code#114 ASC NULLS FIRST], false, 0
+         +- HashAggregate(keys=[Zip Code#114], functions=[], output=[Zip Code#114])
+            +- Exchange hashpartitioning(Zip Code#114, 200), ENSURE_REQUIREMENTS, [plan_id=75]
+               +- HashAggregate(keys=[Zip Code#114], functions=[], output=[Zip Code#114])
+                  +- Project [Zip Code#114]
+                     +- SortMergeJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38))], [knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1))], Inner
+                        :- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#37)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#38)) ASC NULLS FIRST], false, 0
+                        :  +- Exchange hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38)), 200), ENSURE_REQUIREMENTS, [plan_id=67]
+                        :     +- Project [LAT#37, LON#38]
+                        :        +- Filter ((((isnotnull(DATE OCC#13) AND (year(DATE OCC#13) = 2015)) AND isnotnull(Vict Descent#24)) AND isnotnull(LAT#37)) AND isnotnull(LON#38))
+                        :           +- FileScan csv [DATE OCC#13,Vict Descent#24,LAT#37,LON#38] Batched: false, DataFilters: [isnotnull(DATE OCC#13), (year(DATE OCC#13) = 2015), isnotnull(Vict Descent#24), isnotnull(LAT#37..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(DATE OCC), IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DATE OCC:date,Vict Descent:string,LAT:double,LON:double>
+                        +- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) ASC NULLS FIRST], false, 0
+                           +- Exchange hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1)), 200), ENSURE_REQUIREMENTS, [plan_id=68]
+                              +- Filter isnotnull(Zip Code#114)
+                                 +- SortAggregate(key=[LAT#0, LON#1], functions=[first(Zip Code#6, false)], output=[LAT#0, LON#1, Zip Code#114])
+                                    +- Sort [LAT#0 ASC NULLS FIRST, LON#1 ASC NULLS FIRST], false, 0
+                                       +- Exchange hashpartitioning(LAT#0, LON#1, 200), ENSURE_REQUIREMENTS, [plan_id=61]
+                                          +- SortAggregate(key=[knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1], functions=[partial_first(Zip Code#6, false)], output=[LAT#0, LON#1, first#117, valueSet#118])
+                                             +- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0 ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1 ASC NULLS FIRST], false, 0
+                                                +- Project [LAT#0, LON#1, ZIPcode#2 AS Zip Code#6]
+                                                   +- Filter (isnotnull(LAT#0) AND isnotnull(LON#1))
+                                                      +- FileScan csv [LAT#0,LON#1,ZIPcode#2] Batched: false, DataFilters: [isnotnull(LAT#0), isnotnull(LON#1)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
+,None)
+
+(23) Scan csv 
+Output [2]: [Zip Code#97, Estimated Median Income#99]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/LA_income_2015.csv]
+PushedFilters: [IsNotNull(Zip Code)]
+ReadSchema: struct<Zip Code:string,Estimated Median Income:string>
+
+(24) Filter
+Input [2]: [Zip Code#97, Estimated Median Income#99]
+Condition : isnotnull(Zip Code#97)
+
+(25) Project
+Output [2]: [Zip Code#97, cast(regexp_replace(Estimated Median Income#99, [\$\,], , 1) as int) AS Estimated Median Income#103]
+Input [2]: [Zip Code#97, Estimated Median Income#99]
+
+(26) Exchange
+Input [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: hashpartitioning(Zip Code#97, 200), ENSURE_REQUIREMENTS, [plan_id=231]
+
+(27) Sort
+Input [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: [Zip Code#97 ASC NULLS FIRST], false, 0
+
+(28) Scan csv 
+Output [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(DATE OCC), IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)]
+ReadSchema: struct<DATE OCC:date,Vict Descent:string,LAT:double,LON:double>
+
+(29) Filter
+Input [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+Condition : ((((isnotnull(DATE OCC#13) AND (year(DATE OCC#13) = 2015)) AND isnotnull(Vict Descent#24)) AND isnotnull(LAT#37)) AND isnotnull(LON#38))
+
+(30) Project
+Output [2]: [LAT#37, LON#38]
+Input [4]: [DATE OCC#13, Vict Descent#24, LAT#37, LON#38]
+
+(31) Exchange
+Input [2]: [LAT#37, LON#38]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38)), 200), ENSURE_REQUIREMENTS, [plan_id=219]
+
+(32) Sort
+Input [2]: [LAT#37, LON#38]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#38)) ASC NULLS FIRST], false, 0
+
+(33) Scan csv 
+Output [3]: [LAT#0, LON#1, ZIPcode#2]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/revgecoding.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON)]
+ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
+
+(34) Filter
+Input [3]: [LAT#0, LON#1, ZIPcode#2]
+Condition : (isnotnull(LAT#0) AND isnotnull(LON#1))
+
+(35) Project
+Output [3]: [LAT#0, LON#1, ZIPcode#2 AS Zip Code#6]
+Input [3]: [LAT#0, LON#1, ZIPcode#2]
+
+(36) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0 ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1 ASC NULLS FIRST], false, 0
+
+(37) SortAggregate
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1]
+Functions [1]: [partial_first(Zip Code#6, false)]
+Aggregate Attributes [2]: [first#115, valueSet#116]
+Results [4]: [LAT#0, LON#1, first#117, valueSet#118]
+
+(38) Exchange
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Arguments: hashpartitioning(LAT#0, LON#1, 200), ENSURE_REQUIREMENTS, [plan_id=213]
+
+(39) Sort
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Arguments: [LAT#0 ASC NULLS FIRST, LON#1 ASC NULLS FIRST], false, 0
+
+(40) SortAggregate
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Keys [2]: [LAT#0, LON#1]
+Functions [1]: [first(Zip Code#6, false)]
+Aggregate Attributes [1]: [first(Zip Code#6)()#113]
+Results [3]: [LAT#0, LON#1, first(Zip Code#6)()#113 AS Zip Code#114]
+
+(41) Filter
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Condition : isnotnull(Zip Code#114)
+
+(42) Exchange
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1)), 200), ENSURE_REQUIREMENTS, [plan_id=220]
+
+(43) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) ASC NULLS FIRST], false, 0
+
+(44) SortMergeJoin
+Left keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38))]
+Right keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1))]
+Join type: Inner
+Join condition: None
+
+(45) Project
+Output [1]: [Zip Code#114]
+Input [5]: [LAT#37, LON#38, LAT#0, LON#1, Zip Code#114]
+
+(46) HashAggregate
+Input [1]: [Zip Code#114]
+Keys [1]: [Zip Code#114]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#114]
+
+(47) Exchange
+Input [1]: [Zip Code#114]
+Arguments: hashpartitioning(Zip Code#114, 200), ENSURE_REQUIREMENTS, [plan_id=227]
+
+(48) HashAggregate
+Input [1]: [Zip Code#114]
+Keys [1]: [Zip Code#114]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#114]
+
+(49) Sort
+Input [1]: [Zip Code#114]
+Arguments: [Zip Code#114 ASC NULLS FIRST], false, 0
+
+(50) SortMergeJoin
+Left keys [1]: [Zip Code#97]
+Right keys [1]: [Zip Code#114]
+Join type: Inner
+Join condition: None
+
+(51) Project
+Output [2]: [Zip Code#97, Estimated Median Income#103]
+Input [3]: [Zip Code#97, Estimated Median Income#103, Zip Code#114]
+
+(52) AdaptiveSparkPlan
+Output [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: isFinalPlan=false
+
+(53) TakeOrderedAndProject
+Input [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: 3, [Estimated Median Income#103 DESC NULLS LAST], [Zip Code#97]
+
+(54) Filter
+Input [1]: [Zip Code#97]
+Condition : isnotnull(Zip Code#97)
+
+(55) InMemoryTableScan
+Output [2]: [Zip Code#129, Estimated Median Income#103]
+Arguments: [Zip Code#129, Estimated Median Income#103]
+
+(56) InMemoryRelation
+Arguments: [Zip Code#129, Estimated Median Income#103], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@6b01e14a,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Zip Code#97, Estimated Median Income#103]
+   +- SortMergeJoin [Zip Code#97], [Zip Code#114], Inner
+      :- Sort [Zip Code#97 ASC NULLS FIRST], false, 0
+      :  +- Exchange hashpartitioning(Zip Code#97, 200), ENSURE_REQUIREMENTS, [plan_id=79]
+      :     +- Project [Zip Code#97, cast(regexp_replace(Estimated Median Income#99, [\$\,], , 1) as int) AS Estimated Median Income#103]
+      :        +- Filter isnotnull(Zip Code#97)
+      :           +- FileScan csv [Zip Code#97,Estimated Median Income#99] Batched: false, DataFilters: [isnotnull(Zip Code#97)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LA_income_2015.csv], PartitionFilters: [], PushedFilters: [IsNotNull(Zip Code)], ReadSchema: struct<Zip Code:string,Estimated Median Income:string>
+      +- Sort [Zip Code#114 ASC NULLS FIRST], false, 0
+         +- HashAggregate(keys=[Zip Code#114], functions=[], output=[Zip Code#114])
+            +- Exchange hashpartitioning(Zip Code#114, 200), ENSURE_REQUIREMENTS, [plan_id=75]
+               +- HashAggregate(keys=[Zip Code#114], functions=[], output=[Zip Code#114])
+                  +- Project [Zip Code#114]
+                     +- SortMergeJoin [knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38))], [knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1))], Inner
+                        :- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#37)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#38)) ASC NULLS FIRST], false, 0
+                        :  +- Exchange hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38)), 200), ENSURE_REQUIREMENTS, [plan_id=67]
+                        :     +- Project [LAT#37, LON#38]
+                        :        +- Filter ((((isnotnull(DATE OCC#13) AND (year(DATE OCC#13) = 2015)) AND isnotnull(Vict Descent#24)) AND isnotnull(LAT#37)) AND isnotnull(LON#38))
+                        :           +- FileScan csv [DATE OCC#13,Vict Descent#24,LAT#37,LON#38] Batched: false, DataFilters: [isnotnull(DATE OCC#13), (year(DATE OCC#13) = 2015), isnotnull(Vict Descent#24), isnotnull(LAT#37..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(DATE OCC), IsNotNull(Vict Descent), IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<DATE OCC:date,Vict Descent:string,LAT:double,LON:double>
+                        +- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) ASC NULLS FIRST], false, 0
+                           +- Exchange hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1)), 200), ENSURE_REQUIREMENTS, [plan_id=68]
+                              +- Filter isnotnull(Zip Code#114)
+                                 +- SortAggregate(key=[LAT#0, LON#1], functions=[first(Zip Code#6, false)], output=[LAT#0, LON#1, Zip Code#114])
+                                    +- Sort [LAT#0 ASC NULLS FIRST, LON#1 ASC NULLS FIRST], false, 0
+                                       +- Exchange hashpartitioning(LAT#0, LON#1, 200), ENSURE_REQUIREMENTS, [plan_id=61]
+                                          +- SortAggregate(key=[knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1], functions=[partial_first(Zip Code#6, false)], output=[LAT#0, LON#1, first#117, valueSet#118])
+                                             +- Sort [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0 ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1 ASC NULLS FIRST], false, 0
+                                                +- Project [LAT#0, LON#1, ZIPcode#2 AS Zip Code#6]
+                                                   +- Filter (isnotnull(LAT#0) AND isnotnull(LON#1))
+                                                      +- FileScan csv [LAT#0,LON#1,ZIPcode#2] Batched: false, DataFilters: [isnotnull(LAT#0), isnotnull(LON#1)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/revgecoding.csv], PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON)], ReadSchema: struct<LAT:double,LON:double,ZIPcode:string>
+,None)
+
+(57) Exchange
+Input [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: hashpartitioning(Zip Code#97, 200), ENSURE_REQUIREMENTS, [plan_id=258]
+
+(58) Sort
+Input [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: [Zip Code#97 ASC NULLS FIRST], false, 0
+
+(59) Exchange
+Input [2]: [LAT#37, LON#38]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38)), 200), ENSURE_REQUIREMENTS, [plan_id=246]
+
+(60) Sort
+Input [2]: [LAT#37, LON#38]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#38)) ASC NULLS FIRST], false, 0
+
+(61) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0 ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1 ASC NULLS FIRST], false, 0
+
+(62) SortAggregate
+Input [3]: [LAT#0, LON#1, Zip Code#6]
+Keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) AS LAT#0, knownfloatingpointnormalized(normalizenanandzero(LON#1)) AS LON#1]
+Functions [1]: [partial_first(Zip Code#6, false)]
+Aggregate Attributes [2]: [first#115, valueSet#116]
+Results [4]: [LAT#0, LON#1, first#117, valueSet#118]
+
+(63) Exchange
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Arguments: hashpartitioning(LAT#0, LON#1, 200), ENSURE_REQUIREMENTS, [plan_id=240]
+
+(64) Sort
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Arguments: [LAT#0 ASC NULLS FIRST, LON#1 ASC NULLS FIRST], false, 0
+
+(65) SortAggregate
+Input [4]: [LAT#0, LON#1, first#117, valueSet#118]
+Keys [2]: [LAT#0, LON#1]
+Functions [1]: [first(Zip Code#6, false)]
+Aggregate Attributes [1]: [first(Zip Code#6)()#113]
+Results [3]: [LAT#0, LON#1, first(Zip Code#6)()#113 AS Zip Code#114]
+
+(66) Filter
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Condition : isnotnull(Zip Code#114)
+
+(67) Exchange
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Arguments: hashpartitioning(knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1)), 200), ENSURE_REQUIREMENTS, [plan_id=247]
+
+(68) Sort
+Input [3]: [LAT#0, LON#1, Zip Code#114]
+Arguments: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)) ASC NULLS FIRST, knownfloatingpointnormalized(normalizenanandzero(LON#1)) ASC NULLS FIRST], false, 0
+
+(69) SortMergeJoin
+Left keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#37)), knownfloatingpointnormalized(normalizenanandzero(LON#38))]
+Right keys [2]: [knownfloatingpointnormalized(normalizenanandzero(LAT#0)), knownfloatingpointnormalized(normalizenanandzero(LON#1))]
+Join type: Inner
+Join condition: None
+
+(70) Project
+Output [1]: [Zip Code#114]
+Input [5]: [LAT#37, LON#38, LAT#0, LON#1, Zip Code#114]
+
+(71) HashAggregate
+Input [1]: [Zip Code#114]
+Keys [1]: [Zip Code#114]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#114]
+
+(72) Exchange
+Input [1]: [Zip Code#114]
+Arguments: hashpartitioning(Zip Code#114, 200), ENSURE_REQUIREMENTS, [plan_id=254]
+
+(73) HashAggregate
+Input [1]: [Zip Code#114]
+Keys [1]: [Zip Code#114]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#114]
+
+(74) Sort
+Input [1]: [Zip Code#114]
+Arguments: [Zip Code#114 ASC NULLS FIRST], false, 0
+
+(75) SortMergeJoin
+Left keys [1]: [Zip Code#97]
+Right keys [1]: [Zip Code#114]
+Join type: Inner
+Join condition: None
+
+(76) Project
+Output [2]: [Zip Code#97, Estimated Median Income#103]
+Input [3]: [Zip Code#97, Estimated Median Income#103, Zip Code#114]
+
+(77) AdaptiveSparkPlan
+Output [2]: [Zip Code#97, Estimated Median Income#103]
+Arguments: isFinalPlan=false
+
+(78) TakeOrderedAndProject
+Input [2]: [Zip Code#129, Estimated Median Income#103]
+Arguments: 3, [Estimated Median Income#103 ASC NULLS FIRST], [Zip Code#129]
+
+(79) Filter
+Input [1]: [Zip Code#129]
+Condition : isnotnull(Zip Code#129)
+
+(80) Union
+
+(81) HashAggregate
+Input [1]: [Zip Code#97]
+Keys [1]: [Zip Code#97]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#97]
+
+(82) Exchange
+Input [1]: [Zip Code#97]
+Arguments: hashpartitioning(Zip Code#97, 200), ENSURE_REQUIREMENTS, [plan_id=192]
+
+(83) HashAggregate
+Input [1]: [Zip Code#97]
+Keys [1]: [Zip Code#97]
+Functions: []
+Aggregate Attributes: []
+Results [1]: [Zip Code#97]
+
+(84) Sort
+Input [1]: [Zip Code#97]
+Arguments: [Zip Code#97 ASC NULLS FIRST], false, 0
+
+(85) SortMergeJoin
+Left keys [1]: [Zip Code#315]
+Right keys [1]: [Zip Code#97]
+Join type: Inner
+Join condition: None
+
+(86) Project
+Output [1]: [Vict Descent#24]
+Input [3]: [Vict Descent#24, Zip Code#315, Zip Code#97]
+
+(87) HashAggregate
+Input [1]: [Vict Descent#24]
+Keys [1]: [Vict Descent#24]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count#336L]
+Results [2]: [Vict Descent#24, count#337L]
+
+(88) Exchange
+Input [2]: [Vict Descent#24, count#337L]
+Arguments: hashpartitioning(Vict Descent#24, 200), ENSURE_REQUIREMENTS, [plan_id=203]
+
+(89) HashAggregate
+Input [2]: [Vict Descent#24, count#337L]
+Keys [1]: [Vict Descent#24]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#262L]
+Results [2]: [Vict Descent#24, count(1)#262L AS ##266L]
+
+(90) Exchange
+Input [2]: [Vict Descent#24, ##266L]
+Arguments: rangepartitioning(##266L DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=206]
+
+(91) Sort
+Input [2]: [Vict Descent#24, ##266L]
+Arguments: [##266L DESC NULLS LAST], true, 0
+
+(92) Project
+Output [2]: [CASE WHEN (Vict Descent#24 = X) THEN Unknown WHEN (Vict Descent#24 = J) THEN Japanese WHEN (Vict Descent#24 = U) THEN Hawaiian WHEN (Vict Descent#24 = F) THEN Filipino WHEN (Vict Descent#24 = A) THEN Other Asian WHEN (Vict Descent#24 = I) THEN American Indian/Alaskan Native WHEN (Vict Descent#24 = G) THEN Guamanian WHEN (Vict Descent#24 = V) THEN Vietnamese WHEN (Vict Descent#24 = L) THEN Laotian WHEN (Vict Descent#24 = B) THEN Black WHEN (Vict Descent#24 = P) THEN Pacific Islander WHEN (Vict Descent#24 = C) THEN Chinese WHEN (Vict Descent#24 = H) THEN Hispanic/Latin/Mexican WHEN (Vict Descent#24 = W) THEN White WHEN (Vict Descent#24 = K) THEN Korean WHEN (Vict Descent#24 = O) THEN Other WHEN (Vict Descent#24 = D) THEN Cambodian WHEN (Vict Descent#24 = Z) THEN Asian Indian WHEN (Vict Descent#24 = S) THEN Samoan ELSE Vict Descent#24 END AS Vict Descent#271, ##266L]
+Input [2]: [Vict Descent#24, ##266L]
+
+(93) AdaptiveSparkPlan
+Output [2]: [Vict Descent#271, ##266L]
+Arguments: isFinalPlan=false
+
+

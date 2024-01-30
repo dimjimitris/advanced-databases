@@ -1,0 +1,793 @@
+[91mQ4: [00mQuery execution plan (1a, broadcast):
+== Physical Plan ==
+AdaptiveSparkPlan (20)
++- Sort (19)
+   +- Exchange (18)
+      +- HashAggregate (17)
+         +- Exchange (16)
+            +- HashAggregate (15)
+               +- InMemoryTableScan (1)
+                     +- InMemoryRelation (2)
+                           +- AdaptiveSparkPlan (14)
+                              +- Project (13)
+                                 +- BatchEvalPython (12)
+                                    +- Project (11)
+                                       +- BroadcastHashJoin Inner BuildRight (10)
+                                          :- Project (5)
+                                          :  +- Filter (4)
+                                          :     +- Scan csv  (3)
+                                          +- BroadcastExchange (9)
+                                             +- Project (8)
+                                                +- Filter (7)
+                                                   +- Scan csv  (6)
+
+
+(1) InMemoryTableScan
+Output [2]: [Year#95, Distance to Station#188]
+Arguments: [Year#95, Distance to Station#188]
+
+(2) InMemoryRelation
+Arguments: [Year#95, Division#27, Distance to Station#188], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+   +- BatchEvalPython [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+      +- Project [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+         +- BroadcastHashJoin [PREC#125], [PREC#5], Inner, BuildRight, false
+            :- Project [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+            :  +- Filter (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+            :     +- FileScan csv [Date Rptd#39,AREA#42,Weapon Used Cd#54,LAT#64,LON#65] Batched: false, DataFilters: [isnotnull(LAT#64), isnotnull(LON#65), isnotnull(Weapon Used Cd#54), NOT (LAT#64 = 0.0), NOT (LON..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<Date Rptd:date,AREA:int,Weapon Used Cd:int,LAT:double,LON:double>
+            +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[3, int, true] as bigint)),false), [plan_id=32]
+               +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+                  +- Filter isnotnull(PREC#5)
+                     +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [isnotnull(PREC#5)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [IsNotNull(PREC)], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(3) Scan csv 
+Output [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LON,0.0)), GreaterThanOrEqual(Weapon Used Cd,100), LessThanOrEqual(Weapon Used Cd,199), IsNotNull(AREA)]
+ReadSchema: struct<Date Rptd:date,AREA:int,Weapon Used Cd:int,LAT:double,LON:double>
+
+(4) Filter
+Input [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+Condition : (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+
+(5) Project
+Output [4]: [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+Input [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+
+(6) Scan csv 
+Output [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv]
+PushedFilters: [IsNotNull(PREC)]
+ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+
+(7) Filter
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Condition : isnotnull(PREC#5)
+
+(8) Project
+Output [4]: [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+
+(9) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: HashedRelationBroadcastMode(List(cast(input[3, int, true] as bigint)),false), [plan_id=136]
+
+(10) BroadcastHashJoin
+Left keys [1]: [PREC#125]
+Right keys [1]: [PREC#5]
+Join type: Inner
+Join condition: None
+
+(11) Project
+Output [6]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+Input [8]: [PREC#125, LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27, PREC#5]
+
+(12) BatchEvalPython
+Input [6]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+Arguments: [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+
+(13) Project
+Output [3]: [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+Input [7]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27, pythonUDF0#225]
+
+(14) AdaptiveSparkPlan
+Output [3]: [Year#95, Division#27, Distance to Station#188]
+Arguments: isFinalPlan=false
+
+(15) HashAggregate
+Input [2]: [Year#95, Distance to Station#188]
+Keys [1]: [Year#95]
+Functions [2]: [partial_avg(Distance to Station#188), partial_count(1)]
+Aggregate Attributes [3]: [sum#2036, count#2037L, count#2038L]
+Results [4]: [Year#95, sum#2039, count#2040L, count#2041L]
+
+(16) Exchange
+Input [4]: [Year#95, sum#2039, count#2040L, count#2041L]
+Arguments: hashpartitioning(Year#95, 200), ENSURE_REQUIREMENTS, [plan_id=130]
+
+(17) HashAggregate
+Input [4]: [Year#95, sum#2039, count#2040L, count#2041L]
+Keys [1]: [Year#95]
+Functions [2]: [avg(Distance to Station#188), count(1)]
+Aggregate Attributes [2]: [avg(Distance to Station#188)#244, count(1)#246L]
+Results [3]: [Year#95, avg(Distance to Station#188)#244 AS Average Distance to Station#245, count(1)#246L AS ##247L]
+
+(18) Exchange
+Input [3]: [Year#95, Average Distance to Station#245, ##247L]
+Arguments: rangepartitioning(Year#95 ASC NULLS FIRST, 200), ENSURE_REQUIREMENTS, [plan_id=133]
+
+(19) Sort
+Input [3]: [Year#95, Average Distance to Station#245, ##247L]
+Arguments: [Year#95 ASC NULLS FIRST], true, 0
+
+(20) AdaptiveSparkPlan
+Output [3]: [Year#95, Average Distance to Station#245, ##247L]
+Arguments: isFinalPlan=false
+
+
+
+[91mQ4: [00mQuery execution plan (1b, broadcast):
+== Physical Plan ==
+AdaptiveSparkPlan (20)
++- Sort (19)
+   +- Exchange (18)
+      +- HashAggregate (17)
+         +- Exchange (16)
+            +- HashAggregate (15)
+               +- InMemoryTableScan (1)
+                     +- InMemoryRelation (2)
+                           +- AdaptiveSparkPlan (14)
+                              +- Project (13)
+                                 +- BatchEvalPython (12)
+                                    +- Project (11)
+                                       +- BroadcastHashJoin Inner BuildRight (10)
+                                          :- Project (5)
+                                          :  +- Filter (4)
+                                          :     +- Scan csv  (3)
+                                          +- BroadcastExchange (9)
+                                             +- Project (8)
+                                                +- Filter (7)
+                                                   +- Scan csv  (6)
+
+
+(1) InMemoryTableScan
+Output [2]: [Division#27, Distance to Station#188]
+Arguments: [Division#27, Distance to Station#188]
+
+(2) InMemoryRelation
+Arguments: [Year#95, Division#27, Distance to Station#188], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+   +- BatchEvalPython [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+      +- Project [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+         +- BroadcastHashJoin [PREC#125], [PREC#5], Inner, BuildRight, false
+            :- Project [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+            :  +- Filter (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+            :     +- FileScan csv [Date Rptd#39,AREA#42,Weapon Used Cd#54,LAT#64,LON#65] Batched: false, DataFilters: [isnotnull(LAT#64), isnotnull(LON#65), isnotnull(Weapon Used Cd#54), NOT (LAT#64 = 0.0), NOT (LON..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<Date Rptd:date,AREA:int,Weapon Used Cd:int,LAT:double,LON:double>
+            +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[3, int, true] as bigint)),false), [plan_id=32]
+               +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+                  +- Filter isnotnull(PREC#5)
+                     +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [isnotnull(PREC#5)], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [IsNotNull(PREC)], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(3) Scan csv 
+Output [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LON,0.0)), GreaterThanOrEqual(Weapon Used Cd,100), LessThanOrEqual(Weapon Used Cd,199), IsNotNull(AREA)]
+ReadSchema: struct<Date Rptd:date,AREA:int,Weapon Used Cd:int,LAT:double,LON:double>
+
+(4) Filter
+Input [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+Condition : (((((((isnotnull(LAT#64) AND isnotnull(LON#65)) AND isnotnull(Weapon Used Cd#54)) AND NOT (LAT#64 = 0.0)) AND NOT (LON#65 = 0.0)) AND (Weapon Used Cd#54 >= 100)) AND (Weapon Used Cd#54 <= 199)) AND isnotnull(AREA#42))
+
+(5) Project
+Output [4]: [AREA#42 AS PREC#125, LAT#64, LON#65, year(Date Rptd#39) AS Year#95]
+Input [5]: [Date Rptd#39, AREA#42, Weapon Used Cd#54, LAT#64, LON#65]
+
+(6) Scan csv 
+Output [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv]
+PushedFilters: [IsNotNull(PREC)]
+ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+
+(7) Filter
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Condition : isnotnull(PREC#5)
+
+(8) Project
+Output [4]: [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+
+(9) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: HashedRelationBroadcastMode(List(cast(input[3, int, true] as bigint)),false), [plan_id=162]
+
+(10) BroadcastHashJoin
+Left keys [1]: [PREC#125]
+Right keys [1]: [PREC#5]
+Join type: Inner
+Join condition: None
+
+(11) Project
+Output [6]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+Input [8]: [PREC#125, LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27, PREC#5]
+
+(12) BatchEvalPython
+Input [6]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27]
+Arguments: [<lambda>(LAT#64, LON#65, Station LAT#20, Station LON#12)#187], [pythonUDF0#225]
+
+(13) Project
+Output [3]: [Year#95, Division#27, pythonUDF0#225 AS Distance to Station#188]
+Input [7]: [LAT#64, LON#65, Year#95, Station LON#12, Station LAT#20, Division#27, pythonUDF0#225]
+
+(14) AdaptiveSparkPlan
+Output [3]: [Year#95, Division#27, Distance to Station#188]
+Arguments: isFinalPlan=false
+
+(15) HashAggregate
+Input [2]: [Division#27, Distance to Station#188]
+Keys [1]: [Division#27]
+Functions [2]: [partial_avg(Distance to Station#188), partial_count(1)]
+Aggregate Attributes [3]: [sum#2087, count#2088L, count#2089L]
+Results [4]: [Division#27, sum#2090, count#2091L, count#2092L]
+
+(16) Exchange
+Input [4]: [Division#27, sum#2090, count#2091L, count#2092L]
+Arguments: hashpartitioning(Division#27, 200), ENSURE_REQUIREMENTS, [plan_id=156]
+
+(17) HashAggregate
+Input [4]: [Division#27, sum#2090, count#2091L, count#2092L]
+Keys [1]: [Division#27]
+Functions [2]: [avg(Distance to Station#188), count(1)]
+Aggregate Attributes [2]: [avg(Distance to Station#188)#254, count(1)#256L]
+Results [3]: [Division#27, avg(Distance to Station#188)#254 AS Average Distance to Station#255, count(1)#256L AS ##257L]
+
+(18) Exchange
+Input [3]: [Division#27, Average Distance to Station#255, ##257L]
+Arguments: rangepartitioning(##257L DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=159]
+
+(19) Sort
+Input [3]: [Division#27, Average Distance to Station#255, ##257L]
+Arguments: [##257L DESC NULLS LAST], true, 0
+
+(20) AdaptiveSparkPlan
+Output [3]: [Division#27, Average Distance to Station#255, ##257L]
+Arguments: isFinalPlan=false
+
+
+
+[91mQ4: [00mQuery execution plan (2a, broadcast):
+== Physical Plan ==
+AdaptiveSparkPlan (37)
++- Sort (36)
+   +- Exchange (35)
+      +- HashAggregate (34)
+         +- Exchange (33)
+            +- HashAggregate (32)
+               +- InMemoryTableScan (1)
+                     +- InMemoryRelation (2)
+                           +- AdaptiveSparkPlan (31)
+                              +- Project (30)
+                                 +- BroadcastHashJoin Inner BuildRight (29)
+                                    :- Filter (15)
+                                    :  +- InMemoryTableScan (3)
+                                    :        +- InMemoryRelation (4)
+                                    :              +- AdaptiveSparkPlan (14)
+                                    :                 +- Project (13)
+                                    :                    +- BatchEvalPython (12)
+                                    :                       +- BroadcastNestedLoopJoin Cross BuildRight (11)
+                                    :                          :- Project (7)
+                                    :                          :  +- Filter (6)
+                                    :                          :     +- Scan csv  (5)
+                                    :                          +- BroadcastExchange (10)
+                                    :                             +- Project (9)
+                                    :                                +- Scan csv  (8)
+                                    +- BroadcastExchange (28)
+                                       +- Filter (27)
+                                          +- HashAggregate (26)
+                                             +- Exchange (25)
+                                                +- HashAggregate (24)
+                                                   +- Filter (23)
+                                                      +- InMemoryTableScan (16)
+                                                            +- InMemoryRelation (17)
+                                                                  +- AdaptiveSparkPlan (22)
+                                                                     +- Project (21)
+                                                                        +- BatchEvalPython (20)
+                                                                           +- BroadcastNestedLoopJoin Cross BuildRight (19)
+                                                                              :- Project (7)
+                                                                              :  +- Filter (6)
+                                                                              :     +- Scan csv  (5)
+                                                                              +- BroadcastExchange (18)
+                                                                                 +- Project (9)
+                                                                                    +- Scan csv  (8)
+
+
+(1) InMemoryTableScan
+Output [2]: [Year#318, Distance to Closest Station#726]
+Arguments: [Year#318, Distance to Closest Station#726]
+
+(2) InMemoryRelation
+Arguments: [Year#318, Division#27, Distance to Closest Station#726], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+   +- BroadcastHashJoin [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))], [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))], Inner, BuildRight, false
+      :- Filter (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+      :  +- InMemoryTableScan [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+      :        +- InMemoryRelation [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields], StorageLevel(disk, memory, deserialized, 1 replicas)
+      :              +- AdaptiveSparkPlan isFinalPlan=false
+      :                 +- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+      :                    +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      :                       +- BroadcastNestedLoopJoin BuildRight, Cross
+      :                          :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+      :                          :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+      :                          :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+      :                          +- BroadcastExchange IdentityBroadcastMode, [plan_id=106]
+      :                             +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+      :                                +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+      +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, int, true], knownfloatingpointnormalized(normalizenanandzero(input[1, double, false]))),false), [plan_id=102]
+         +- Filter isnotnull(Distance to Station#653)
+            +- HashAggregate(keys=[DR_NO#656], functions=[min(Distance to Station#412)], output=[DR_NO#656, Distance to Station#653])
+               +- Exchange hashpartitioning(DR_NO#656, 200), ENSURE_REQUIREMENTS, [plan_id=98]
+                  +- HashAggregate(keys=[DR_NO#656], functions=[partial_min(Distance to Station#412)], output=[DR_NO#656, min#1955])
+                     +- Filter isnotnull(DR_NO#656)
+                        +- InMemoryTableScan [DR_NO#656, Distance to Station#412], [isnotnull(DR_NO#656)]
+                              +- InMemoryRelation [DR_NO#656, Date Rptd#657, DATE OCC#658, TIME OCC#659, PREC#348, AREA NAME#661, Rpt Dist No#662, Part 1-2#663, Crm Cd#664, Crm Cd Desc#665, Mocodes#666, Vict Age#667, Vict Sex#668, Vict Descent#669, Premis Cd#670, Premis Desc#671, Weapon Used Cd#672, Weapon Desc#673, Status#674, Status Desc#675, Crm Cd 1#676, Crm Cd 2#677, Crm Cd 3#678, Crm Cd 4#679, ... 10 more fields], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                    +- AdaptiveSparkPlan isFinalPlan=false
+                                       +- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+                                          +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+                                             +- BroadcastNestedLoopJoin BuildRight, Cross
+                                                :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+                                                :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+                                                :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+                                                +- BroadcastExchange IdentityBroadcastMode, [plan_id=111]
+                                                   +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+                                                      +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(3) InMemoryTableScan
+Output [4]: [DR_NO#261, Year#318, Division#27, Distance to Station#412]
+Arguments: [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+
+(4) InMemoryRelation
+Arguments: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+         :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+         +- BroadcastExchange IdentityBroadcastMode, [plan_id=63]
+            +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+               +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(5) Scan csv 
+Output [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LON,0.0)), GreaterThanOrEqual(Weapon Used Cd,100), LessThanOrEqual(Weapon Used Cd,199)]
+ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist No:int,Part 1-2:string,Crm Cd:int,Crm Cd Desc:string,Mocodes:string,Vict Age:int,Vict Sex:string,Vict Descent:string,Premis Cd:int,Premis Desc:string,Weapon Used Cd:int,Weapon Desc:string,Status:string,Status Desc:string,Crm Cd 1:int,Crm Cd 2:int,Crm Cd 3:int,Crm Cd 4:int,LOCATION:string,Cross Street:string,LAT:double,LON:double>
+
+(6) Filter
+Input [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+Condition : ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+
+(7) Project
+Output [29]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, year(Date Rptd#262) AS Year#318]
+Input [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+
+(8) Scan csv 
+Output [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv]
+ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+
+(9) Project
+Output [4]: [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+
+(10) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: IdentityBroadcastMode, [plan_id=106]
+
+(11) BroadcastNestedLoopJoin
+Join type: Cross
+Join condition: None
+
+(12) BatchEvalPython
+Input [33]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+
+(13) Project
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447 AS Distance to Station#412]
+Input [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447]
+
+(14) AdaptiveSparkPlan
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, Distance to Station#412]
+Arguments: isFinalPlan=false
+
+(15) Filter
+Input [4]: [DR_NO#261, Year#318, Division#27, Distance to Station#412]
+Condition : (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+
+(16) InMemoryTableScan
+Output [2]: [DR_NO#656, Distance to Station#412]
+Arguments: [DR_NO#656, Distance to Station#412], [isnotnull(DR_NO#656)]
+
+(17) InMemoryRelation
+Arguments: [DR_NO#656, Date Rptd#657, DATE OCC#658, TIME OCC#659, PREC#348, AREA NAME#661, Rpt Dist No#662, Part 1-2#663, Crm Cd#664, Crm Cd Desc#665, Mocodes#666, Vict Age#667, Vict Sex#668, Vict Descent#669, Premis Cd#670, Premis Desc#671, Weapon Used Cd#672, Weapon Desc#673, Status#674, Status Desc#675, Crm Cd 1#676, Crm Cd 2#677, Crm Cd 3#678, Crm Cd 4#679, ... 10 more fields], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+         :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+         +- BroadcastExchange IdentityBroadcastMode, [plan_id=63]
+            +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+               +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(18) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: IdentityBroadcastMode, [plan_id=111]
+
+(19) BroadcastNestedLoopJoin
+Join type: Cross
+Join condition: None
+
+(20) BatchEvalPython
+Input [33]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+
+(21) Project
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447 AS Distance to Station#412]
+Input [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447]
+
+(22) AdaptiveSparkPlan
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, Distance to Station#412]
+Arguments: isFinalPlan=false
+
+(23) Filter
+Input [2]: [DR_NO#656, Distance to Station#412]
+Condition : isnotnull(DR_NO#656)
+
+(24) HashAggregate
+Input [2]: [DR_NO#656, Distance to Station#412]
+Keys [1]: [DR_NO#656]
+Functions [1]: [partial_min(Distance to Station#412)]
+Aggregate Attributes [1]: [min#1954]
+Results [2]: [DR_NO#656, min#1955]
+
+(25) Exchange
+Input [2]: [DR_NO#656, min#1955]
+Arguments: hashpartitioning(DR_NO#656, 200), ENSURE_REQUIREMENTS, [plan_id=188]
+
+(26) HashAggregate
+Input [2]: [DR_NO#656, min#1955]
+Keys [1]: [DR_NO#656]
+Functions [1]: [min(Distance to Station#412)]
+Aggregate Attributes [1]: [min(Distance to Station#412)#652]
+Results [2]: [DR_NO#656, min(Distance to Station#412)#652 AS Distance to Station#653]
+
+(27) Filter
+Input [2]: [DR_NO#656, Distance to Station#653]
+Condition : isnotnull(Distance to Station#653)
+
+(28) BroadcastExchange
+Input [2]: [DR_NO#656, Distance to Station#653]
+Arguments: HashedRelationBroadcastMode(List(input[0, int, true], knownfloatingpointnormalized(normalizenanandzero(input[1, double, false]))),false), [plan_id=192]
+
+(29) BroadcastHashJoin
+Left keys [2]: [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))]
+Right keys [2]: [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))]
+Join type: Inner
+Join condition: None
+
+(30) Project
+Output [3]: [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+Input [6]: [DR_NO#261, Year#318, Division#27, Distance to Station#412, DR_NO#656, Distance to Station#653]
+
+(31) AdaptiveSparkPlan
+Output [3]: [Year#318, Division#27, Distance to Closest Station#726]
+Arguments: isFinalPlan=false
+
+(32) HashAggregate
+Input [2]: [Year#318, Distance to Closest Station#726]
+Keys [1]: [Year#318]
+Functions [2]: [partial_avg(Distance to Closest Station#726), partial_count(1)]
+Aggregate Attributes [3]: [sum#2138, count#2139L, count#2140L]
+Results [4]: [Year#318, sum#2141, count#2142L, count#2143L]
+
+(33) Exchange
+Input [4]: [Year#318, sum#2141, count#2142L, count#2143L]
+Arguments: hashpartitioning(Year#318, 200), ENSURE_REQUIREMENTS, [plan_id=182]
+
+(34) HashAggregate
+Input [4]: [Year#318, sum#2141, count#2142L, count#2143L]
+Keys [1]: [Year#318]
+Functions [2]: [avg(Distance to Closest Station#726), count(1)]
+Aggregate Attributes [2]: [avg(Distance to Closest Station#726)#1974, count(1)#1976L]
+Results [3]: [Year#318, avg(Distance to Closest Station#726)#1974 AS Average Distance to Closest Station#1975, count(1)#1976L AS ##1977L]
+
+(35) Exchange
+Input [3]: [Year#318, Average Distance to Closest Station#1975, ##1977L]
+Arguments: rangepartitioning(Year#318 ASC NULLS FIRST, 200), ENSURE_REQUIREMENTS, [plan_id=185]
+
+(36) Sort
+Input [3]: [Year#318, Average Distance to Closest Station#1975, ##1977L]
+Arguments: [Year#318 ASC NULLS FIRST], true, 0
+
+(37) AdaptiveSparkPlan
+Output [3]: [Year#318, Average Distance to Closest Station#1975, ##1977L]
+Arguments: isFinalPlan=false
+
+
+
+[91mQ4: [00mQuery execution plan (2b, broadcast):
+== Physical Plan ==
+AdaptiveSparkPlan (37)
++- Sort (36)
+   +- Exchange (35)
+      +- HashAggregate (34)
+         +- Exchange (33)
+            +- HashAggregate (32)
+               +- InMemoryTableScan (1)
+                     +- InMemoryRelation (2)
+                           +- AdaptiveSparkPlan (31)
+                              +- Project (30)
+                                 +- BroadcastHashJoin Inner BuildRight (29)
+                                    :- Filter (15)
+                                    :  +- InMemoryTableScan (3)
+                                    :        +- InMemoryRelation (4)
+                                    :              +- AdaptiveSparkPlan (14)
+                                    :                 +- Project (13)
+                                    :                    +- BatchEvalPython (12)
+                                    :                       +- BroadcastNestedLoopJoin Cross BuildRight (11)
+                                    :                          :- Project (7)
+                                    :                          :  +- Filter (6)
+                                    :                          :     +- Scan csv  (5)
+                                    :                          +- BroadcastExchange (10)
+                                    :                             +- Project (9)
+                                    :                                +- Scan csv  (8)
+                                    +- BroadcastExchange (28)
+                                       +- Filter (27)
+                                          +- HashAggregate (26)
+                                             +- Exchange (25)
+                                                +- HashAggregate (24)
+                                                   +- Filter (23)
+                                                      +- InMemoryTableScan (16)
+                                                            +- InMemoryRelation (17)
+                                                                  +- AdaptiveSparkPlan (22)
+                                                                     +- Project (21)
+                                                                        +- BatchEvalPython (20)
+                                                                           +- BroadcastNestedLoopJoin Cross BuildRight (19)
+                                                                              :- Project (7)
+                                                                              :  +- Filter (6)
+                                                                              :     +- Scan csv  (5)
+                                                                              +- BroadcastExchange (18)
+                                                                                 +- Project (9)
+                                                                                    +- Scan csv  (8)
+
+
+(1) InMemoryTableScan
+Output [2]: [Division#27, Distance to Closest Station#726]
+Arguments: [Division#27, Distance to Closest Station#726]
+
+(2) InMemoryRelation
+Arguments: [Year#318, Division#27, Distance to Closest Station#726], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+   +- BroadcastHashJoin [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))], [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))], Inner, BuildRight, false
+      :- Filter (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+      :  +- InMemoryTableScan [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+      :        +- InMemoryRelation [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields], StorageLevel(disk, memory, deserialized, 1 replicas)
+      :              +- AdaptiveSparkPlan isFinalPlan=false
+      :                 +- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+      :                    +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      :                       +- BroadcastNestedLoopJoin BuildRight, Cross
+      :                          :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+      :                          :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+      :                          :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+      :                          +- BroadcastExchange IdentityBroadcastMode, [plan_id=106]
+      :                             +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+      :                                +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+      +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, int, true], knownfloatingpointnormalized(normalizenanandzero(input[1, double, false]))),false), [plan_id=102]
+         +- Filter isnotnull(Distance to Station#653)
+            +- HashAggregate(keys=[DR_NO#656], functions=[min(Distance to Station#412)], output=[DR_NO#656, Distance to Station#653])
+               +- Exchange hashpartitioning(DR_NO#656, 200), ENSURE_REQUIREMENTS, [plan_id=98]
+                  +- HashAggregate(keys=[DR_NO#656], functions=[partial_min(Distance to Station#412)], output=[DR_NO#656, min#1955])
+                     +- Filter isnotnull(DR_NO#656)
+                        +- InMemoryTableScan [DR_NO#656, Distance to Station#412], [isnotnull(DR_NO#656)]
+                              +- InMemoryRelation [DR_NO#656, Date Rptd#657, DATE OCC#658, TIME OCC#659, PREC#348, AREA NAME#661, Rpt Dist No#662, Part 1-2#663, Crm Cd#664, Crm Cd Desc#665, Mocodes#666, Vict Age#667, Vict Sex#668, Vict Descent#669, Premis Cd#670, Premis Desc#671, Weapon Used Cd#672, Weapon Desc#673, Status#674, Status Desc#675, Crm Cd 1#676, Crm Cd 2#677, Crm Cd 3#678, Crm Cd 4#679, ... 10 more fields], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                    +- AdaptiveSparkPlan isFinalPlan=false
+                                       +- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+                                          +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+                                             +- BroadcastNestedLoopJoin BuildRight, Cross
+                                                :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+                                                :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+                                                :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+                                                +- BroadcastExchange IdentityBroadcastMode, [plan_id=111]
+                                                   +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+                                                      +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(3) InMemoryTableScan
+Output [4]: [DR_NO#261, Year#318, Division#27, Distance to Station#412]
+Arguments: [DR_NO#261, Year#318, Division#27, Distance to Station#412], [isnotnull(DR_NO#261), isnotnull(Distance to Station#412)]
+
+(4) InMemoryRelation
+Arguments: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+         :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+         +- BroadcastExchange IdentityBroadcastMode, [plan_id=63]
+            +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+               +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(5) Scan csv 
+Output [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to_Present.csv]
+PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LON,0.0)), GreaterThanOrEqual(Weapon Used Cd,100), LessThanOrEqual(Weapon Used Cd,199)]
+ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist No:int,Part 1-2:string,Crm Cd:int,Crm Cd Desc:string,Mocodes:string,Vict Age:int,Vict Sex:string,Vict Descent:string,Premis Cd:int,Premis Desc:string,Weapon Used Cd:int,Weapon Desc:string,Status:string,Status Desc:string,Crm Cd 1:int,Crm Cd 2:int,Crm Cd 3:int,Crm Cd 4:int,LOCATION:string,Cross Street:string,LAT:double,LON:double>
+
+(6) Filter
+Input [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+Condition : ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+
+(7) Project
+Output [29]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, year(Date Rptd#262) AS Year#318]
+Input [28]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288]
+
+(8) Scan csv 
+Output [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+Batched: false
+Location: InMemoryFileIndex [hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv]
+ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+
+(9) Project
+Output [4]: [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+Input [4]: [X#0, Y#1, DIVISION#3, PREC#5]
+
+(10) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: IdentityBroadcastMode, [plan_id=106]
+
+(11) BroadcastNestedLoopJoin
+Join type: Cross
+Join condition: None
+
+(12) BatchEvalPython
+Input [33]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+
+(13) Project
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447 AS Distance to Station#412]
+Input [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447]
+
+(14) AdaptiveSparkPlan
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, Distance to Station#412]
+Arguments: isFinalPlan=false
+
+(15) Filter
+Input [4]: [DR_NO#261, Year#318, Division#27, Distance to Station#412]
+Condition : (isnotnull(DR_NO#261) AND isnotnull(Distance to Station#412))
+
+(16) InMemoryTableScan
+Output [2]: [DR_NO#656, Distance to Station#412]
+Arguments: [DR_NO#656, Distance to Station#412], [isnotnull(DR_NO#656)]
+
+(17) InMemoryRelation
+Arguments: [DR_NO#656, Date Rptd#657, DATE OCC#658, TIME OCC#659, PREC#348, AREA NAME#661, Rpt Dist No#662, Part 1-2#663, Crm Cd#664, Crm Cd Desc#665, Mocodes#666, Vict Age#667, Vict Sex#668, Vict Descent#669, Premis Cd#670, Premis Desc#671, Weapon Used Cd#672, Weapon Desc#673, Status#674, Status Desc#675, Crm Cd 1#676, Crm Cd 2#677, Crm Cd 3#678, Crm Cd 4#679, ... 10 more fields], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@2f2d3398,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=false
++- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 10 more fields]
+   +- BatchEvalPython [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+      +- BroadcastNestedLoopJoin BuildRight, Cross
+         :- Project [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, AREA#265 AS PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, ... 5 more fields]
+         :  +- Filter ((((((isnotnull(LAT#287) AND isnotnull(LON#288)) AND isnotnull(Weapon Used Cd#277)) AND NOT (LAT#287 = 0.0)) AND NOT (LON#288 = 0.0)) AND (Weapon Used Cd#277 >= 100)) AND (Weapon Used Cd#277 <= 199))
+         :     +- FileScan csv [DR_NO#261,Date Rptd#262,DATE OCC#263,TIME OCC#264,AREA#265,AREA NAME#266,Rpt Dist No#267,Part 1-2#268,Crm Cd#269,Crm Cd Desc#270,Mocodes#271,Vict Age#272,Vict Sex#273,Vict Descent#274,Premis Cd#275,Premis Desc#276,Weapon Used Cd#277,Weapon Desc#278,Status#279,Status Desc#280,Crm Cd 1#281,Crm Cd 2#282,Crm Cd 3#283,Crm Cd 4#284,... 4 more fields] Batched: false, DataFilters: [isnotnull(LAT#287), isnotnull(LON#288), isnotnull(Weapon Used Cd#277), NOT (LAT#287 = 0.0), NOT ..., Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/Crime_Data_from_2010_to..., PartitionFilters: [], PushedFilters: [IsNotNull(LAT), IsNotNull(LON), IsNotNull(Weapon Used Cd), Not(EqualTo(LAT,0.0)), Not(EqualTo(LO..., ReadSchema: struct<DR_NO:int,Date Rptd:date,DATE OCC:date,TIME OCC:string,AREA:int,AREA NAME:string,Rpt Dist ...
+         +- BroadcastExchange IdentityBroadcastMode, [plan_id=63]
+            +- Project [X#0 AS Station LON#12, Y#1 AS Station LAT#20, DIVISION#3 AS Division#27, PREC#5]
+               +- FileScan csv [X#0,Y#1,DIVISION#3,PREC#5] Batched: false, DataFilters: [], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://okeanos-master:54310/user/user/datasets/LAPD_Police_Stations.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<X:double,Y:double,DIVISION:string,PREC:int>
+,None)
+
+(18) BroadcastExchange
+Input [4]: [Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: IdentityBroadcastMode, [plan_id=111]
+
+(19) BroadcastNestedLoopJoin
+Join type: Cross
+Join condition: None
+
+(20) BatchEvalPython
+Input [33]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5]
+Arguments: [<lambda>(LAT#287, LON#288, Station LAT#20, Station LON#12)#411], [pythonUDF0#447]
+
+(21) Project
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447 AS Distance to Station#412]
+Input [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, pythonUDF0#447]
+
+(22) AdaptiveSparkPlan
+Output [34]: [DR_NO#261, Date Rptd#262, DATE OCC#263, TIME OCC#264, PREC#348, AREA NAME#266, Rpt Dist No#267, Part 1-2#268, Crm Cd#269, Crm Cd Desc#270, Mocodes#271, Vict Age#272, Vict Sex#273, Vict Descent#274, Premis Cd#275, Premis Desc#276, Weapon Used Cd#277, Weapon Desc#278, Status#279, Status Desc#280, Crm Cd 1#281, Crm Cd 2#282, Crm Cd 3#283, Crm Cd 4#284, LOCATION#285, Cross Street#286, LAT#287, LON#288, Year#318, Station LON#12, Station LAT#20, Division#27, PREC#5, Distance to Station#412]
+Arguments: isFinalPlan=false
+
+(23) Filter
+Input [2]: [DR_NO#656, Distance to Station#412]
+Condition : isnotnull(DR_NO#656)
+
+(24) HashAggregate
+Input [2]: [DR_NO#656, Distance to Station#412]
+Keys [1]: [DR_NO#656]
+Functions [1]: [partial_min(Distance to Station#412)]
+Aggregate Attributes [1]: [min#1954]
+Results [2]: [DR_NO#656, min#1955]
+
+(25) Exchange
+Input [2]: [DR_NO#656, min#1955]
+Arguments: hashpartitioning(DR_NO#656, 200), ENSURE_REQUIREMENTS, [plan_id=216]
+
+(26) HashAggregate
+Input [2]: [DR_NO#656, min#1955]
+Keys [1]: [DR_NO#656]
+Functions [1]: [min(Distance to Station#412)]
+Aggregate Attributes [1]: [min(Distance to Station#412)#652]
+Results [2]: [DR_NO#656, min(Distance to Station#412)#652 AS Distance to Station#653]
+
+(27) Filter
+Input [2]: [DR_NO#656, Distance to Station#653]
+Condition : isnotnull(Distance to Station#653)
+
+(28) BroadcastExchange
+Input [2]: [DR_NO#656, Distance to Station#653]
+Arguments: HashedRelationBroadcastMode(List(input[0, int, true], knownfloatingpointnormalized(normalizenanandzero(input[1, double, false]))),false), [plan_id=220]
+
+(29) BroadcastHashJoin
+Left keys [2]: [DR_NO#261, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#412))]
+Right keys [2]: [DR_NO#656, knownfloatingpointnormalized(normalizenanandzero(Distance to Station#653))]
+Join type: Inner
+Join condition: None
+
+(30) Project
+Output [3]: [Year#318, Division#27, Distance to Station#412 AS Distance to Closest Station#726]
+Input [6]: [DR_NO#261, Year#318, Division#27, Distance to Station#412, DR_NO#656, Distance to Station#653]
+
+(31) AdaptiveSparkPlan
+Output [3]: [Year#318, Division#27, Distance to Closest Station#726]
+Arguments: isFinalPlan=false
+
+(32) HashAggregate
+Input [2]: [Division#27, Distance to Closest Station#726]
+Keys [1]: [Division#27]
+Functions [2]: [partial_avg(Distance to Closest Station#726), partial_count(1)]
+Aggregate Attributes [3]: [sum#2189, count#2190L, count#2191L]
+Results [4]: [Division#27, sum#2192, count#2193L, count#2194L]
+
+(33) Exchange
+Input [4]: [Division#27, sum#2192, count#2193L, count#2194L]
+Arguments: hashpartitioning(Division#27, 200), ENSURE_REQUIREMENTS, [plan_id=210]
+
+(34) HashAggregate
+Input [4]: [Division#27, sum#2192, count#2193L, count#2194L]
+Keys [1]: [Division#27]
+Functions [2]: [avg(Distance to Closest Station#726), count(1)]
+Aggregate Attributes [2]: [avg(Distance to Closest Station#726)#1984, count(1)#1986L]
+Results [3]: [Division#27, avg(Distance to Closest Station#726)#1984 AS Average Distance to Closest Station#1985, count(1)#1986L AS ##1987L]
+
+(35) Exchange
+Input [3]: [Division#27, Average Distance to Closest Station#1985, ##1987L]
+Arguments: rangepartitioning(##1987L DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=213]
+
+(36) Sort
+Input [3]: [Division#27, Average Distance to Closest Station#1985, ##1987L]
+Arguments: [##1987L DESC NULLS LAST], true, 0
+
+(37) AdaptiveSparkPlan
+Output [3]: [Division#27, Average Distance to Closest Station#1985, ##1987L]
+Arguments: isFinalPlan=false
+
+
